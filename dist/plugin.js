@@ -1,10 +1,12 @@
+'use strict';
+
 /**
  * carte blanche implementation for angular2
  */
-const path = require('path');
-const isString = require('lodash/isString');
-const isNaN = require('lodash/isNaN');
-const defaults = require('lodash/defaults');
+var path = require('path');
+var isString = require('lodash/isString');
+var isNaN = require('lodash/isNaN');
+var defaults = require('lodash/defaults');
 
 /**
  * Initial plugin function
@@ -23,9 +25,7 @@ const defaults = require('lodash/defaults');
 function Angular2Plugin(options) {
     // Make sure the plugin was instantiated as a constructor, i.e. new Angular2Plugin()
     if (!(this instanceof Angular2Plugin)) {
-        throw new Error(
-            'The Angular2Plugin must be instantiated with the "new" keyword, i.e. "new Angular2Plugin()"\n\n'
-        );
+        throw new Error('The Angular2Plugin must be instantiated with the "new" keyword, i.e. "new Angular2Plugin()"\n\n');
     }
 
     this.options = options || {};
@@ -35,7 +35,7 @@ function Angular2Plugin(options) {
         throw new Error('The "hostname" option of the Angular2Plugin must be a string!\n\n');
     }
 
-    const parsedPort = parseFloat(this.options.port);
+    var parsedPort = parseFloat(this.options.port);
     // The port option must be something that can be made a number
     if (this.options.port && isNaN(parsedPort)) {
         throw new Error('The "port" option of the Angular2Plugin must be a number!\n\n');
@@ -48,18 +48,12 @@ function Angular2Plugin(options) {
 
     // The variationFolderName option must be a string
     if (this.options.variationFolderName && !isString(this.options.variationFolderName)) {
-        throw new Error(
-            'The "variationFolderName" option of the Angular2Plugin must be a string!\n\n'
-        );
+        throw new Error('The "variationFolderName" option of the Angular2Plugin must be a string!\n\n');
     }
 
     // The files option must be an Array or a String
-    if (this.options.files
-        && !isString(this.options.files)
-        && (!Array.isArray(this.options.files))) {
-        throw new Error(
-            'The "files" option of the Angular2Plugin must be an array!\n\n'
-        );
+    if (this.options.files && !isString(this.options.files) && !Array.isArray(this.options.files)) {
+        throw new Error('The "files" option of the Angular2Plugin must be an array!\n\n');
     }
 }
 
@@ -68,26 +62,24 @@ function Angular2Plugin(options) {
  */
 Angular2Plugin.prototype.apply = function apply(compiler) {
     // Setting Default options for the plugin
-    const options = defaults({}, this.options, {
+    var options = defaults({}, this.options, {
         hostname: 'localhost',
         files: [],
         injectTags: [],
         port: 8082,
-        variationFolderName: 'variations',
+        variationFolderName: 'variations'
     });
 
     compiler.plugin('compilation', function (compilation) {
         // Called before processing the components, mutate data to pass it around
-        compilation.plugin('carte-blanche-plugin-before-processing', function (data) {
-
-        });
+        compilation.plugin('carte-blanche-plugin-before-processing', function (data) {});
         // Called after the processing, gets the renderToClient API to visually
         // render something in the client area
         compilation.plugin('carte-blanche-plugin-processing', function (renderToClient) {
             renderToClient({
                 name: 'angular2',
                 frontendData: { options: options },
-                frontendPlugin: `${require.resolve('./frontend/frontend.js')}`,
+                frontendPlugin: '' + require.resolve('./frontend/frontend.js')
             });
         });
     });

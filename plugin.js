@@ -1,11 +1,23 @@
 /**
- * carte-blanche-angular2
- *
- * CarteBlanche plugin for Angular2
+ * carte blanche implementation for angular2
  */
 
+/**
+ * Initial plugin function
+ * 
+ * @params {Object} options
+ * The options the user sends to the plugin
+ * 
+ * We should get from the user : 
+ * 
+ * hostname - hostname for the server
+ * port - Port where the server will run
+ * variationFolderName - The folder where the variants area
+ * files - Files where to look for components? * question
+ * 
+ */
 function carteBlancheAngular2(options) {
-    // Make sure the plugin was instantiated as a constructor, i.e. new ReactPlugin()
+    // Make sure the plugin was instantiated as a constructor, i.e. new carteBlancheAngular2()
     if (!(this instanceof carteBlancheAngular2)) {
         throw new Error(
             'The carteBlancheAngular2 must be instantiated with the "new" keyword, i.e. "new carteBlancheAngular2()"\n\n'
@@ -16,13 +28,13 @@ function carteBlancheAngular2(options) {
 
     // The hostname option must be a string
     if (this.options.hostname && !isString(this.options.hostname)) {
-        throw new Error('The "hostname" option of the ReactPlugin must be a string!\n\n');
+        throw new Error('The "hostname" option of the carteBlancheAngular2 must be a string!\n\n');
     }
 
     const parsedPort = parseFloat(this.options.port);
     // The port option must be something that can be made a number
     if (this.options.port && isNaN(parsedPort)) {
-        throw new Error('The "port" option of the ReactPlugin must be a number!\n\n');
+        throw new Error('The "port" option of the carteBlancheAngular2 must be a number!\n\n');
     }
 
     // If the port can be interpreted as a number, it must be above 0 and below 65535
@@ -33,7 +45,7 @@ function carteBlancheAngular2(options) {
     // The variationFolderName option must be a string
     if (this.options.variationFolderName && !isString(this.options.variationFolderName)) {
         throw new Error(
-            'The "variationFolderName" option of the ReactPlugin must be a string!\n\n'
+            'The "variationFolderName" option of the carteBlancheAngular2 must be a string!\n\n'
         );
     }
 
@@ -42,7 +54,7 @@ function carteBlancheAngular2(options) {
         && !isString(this.options.files)
         && (!Array.isArray(this.options.files))) {
         throw new Error(
-            'The "files" option of the ReactPlugin must be an array!\n\n'
+            'The "files" option of the carteBlancheAngular2 must be an array!\n\n'
         );
     }
 }
@@ -51,19 +63,27 @@ function carteBlancheAngular2(options) {
  * Initializes the plugin, called after the main function above
  */
 carteBlancheAngular2.prototype.apply = function apply(compiler) {
-    var options = this.options;
+    // Setting Default options for the plugin
+    const options = defaults({}, this.options, {
+        hostname: 'localhost',
+        files: [],
+        injectTags: [],
+        port: 8082,
+        variationFolderName: 'variations',
+    });
+
     compiler.plugin('compilation', function (compilation) {
         // Called before processing the components, mutate data to pass it around
         compilation.plugin('carte-blanche-plugin-before-processing', function (data) {
-            data.someVariable = options.someVariable;
+
         });
         // Called after the processing, gets the renderToClient API to visually
         // render something in the client area
         compilation.plugin('carte-blanche-plugin-processing', function (renderToClient) {
             renderToClient({
-                name: 'carte-blanche-angular2',
+                name: 'carteBlancheAngular2',
                 frontendData: { options: options },
-                frontendPlugin: `${require.resolve('./frontend.js')}`,
+                frontendPlugin: `${require.resolve('./frontend/frontend.js')}`,
             });
         });
     });

@@ -9,19 +9,32 @@
 ## Usage
 
 ```js
-var carte-blanche-angular2 = require('carte-blanche-angular2')
+var carteBlancheAngular2 = require('carteBlancheAngular2')
 
 plugins: [
-  new carte-blanche-angular2({ /* …options… */ })
+  new carteBlancheAngular2({ /* …options… */ })
 ]
 ```
 
 ## Options
 
-- `someVariable`: (default: false) Changes something in the plugin.
+- `variationFolderName` (default: `variations`): The name of the folders that stores the variation files.
+```JS
+new carteBlancheAngular2({
+  variationFolderName: 'examples'
+})
+```
 
+- `port` (default: 8082): The port the variations server runs at.
   ```JS
-  new carte-blanche-angular2({
-    someVariable: true
+  new carteBlancheAngular2({
+    port: 7000
+  })
+  ```
+
+- `hostname` (default: `localhost`): The URL the variations server runs at.
+  ```JS
+  new carteBlancheAngular2({
+    hostname: 'mydomain.com'
   })
   ```

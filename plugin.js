@@ -1,6 +1,10 @@
 /**
  * carte blanche implementation for angular2
  */
+const path = require('path');
+const isString = require('lodash/isString');
+const isNaN = require('lodash/isNaN');
+const defaults = require('lodash/defaults');
 
 /**
  * Initial plugin function

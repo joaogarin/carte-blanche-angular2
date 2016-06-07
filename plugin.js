@@ -20,11 +20,11 @@ const defaults = require('lodash/defaults');
  * files - Files where to look for components? * question
  * 
  */
-function carteBlancheAngular2(options) {
-    // Make sure the plugin was instantiated as a constructor, i.e. new carteBlancheAngular2()
-    if (!(this instanceof carteBlancheAngular2)) {
+function Angular2Plugin(options) {
+    // Make sure the plugin was instantiated as a constructor, i.e. new Angular2Plugin()
+    if (!(this instanceof Angular2Plugin)) {
         throw new Error(
-            'The carteBlancheAngular2 must be instantiated with the "new" keyword, i.e. "new carteBlancheAngular2()"\n\n'
+            'The Angular2Plugin must be instantiated with the "new" keyword, i.e. "new Angular2Plugin()"\n\n'
         );
     }
 
@@ -32,13 +32,13 @@ function carteBlancheAngular2(options) {
 
     // The hostname option must be a string
     if (this.options.hostname && !isString(this.options.hostname)) {
-        throw new Error('The "hostname" option of the carteBlancheAngular2 must be a string!\n\n');
+        throw new Error('The "hostname" option of the Angular2Plugin must be a string!\n\n');
     }
 
     const parsedPort = parseFloat(this.options.port);
     // The port option must be something that can be made a number
     if (this.options.port && isNaN(parsedPort)) {
-        throw new Error('The "port" option of the carteBlancheAngular2 must be a number!\n\n');
+        throw new Error('The "port" option of the Angular2Plugin must be a number!\n\n');
     }
 
     // If the port can be interpreted as a number, it must be above 0 and below 65535
@@ -49,7 +49,7 @@ function carteBlancheAngular2(options) {
     // The variationFolderName option must be a string
     if (this.options.variationFolderName && !isString(this.options.variationFolderName)) {
         throw new Error(
-            'The "variationFolderName" option of the carteBlancheAngular2 must be a string!\n\n'
+            'The "variationFolderName" option of the Angular2Plugin must be a string!\n\n'
         );
     }
 
@@ -58,7 +58,7 @@ function carteBlancheAngular2(options) {
         && !isString(this.options.files)
         && (!Array.isArray(this.options.files))) {
         throw new Error(
-            'The "files" option of the carteBlancheAngular2 must be an array!\n\n'
+            'The "files" option of the Angular2Plugin must be an array!\n\n'
         );
     }
 }
@@ -66,7 +66,7 @@ function carteBlancheAngular2(options) {
 /**
  * Initializes the plugin, called after the main function above
  */
-carteBlancheAngular2.prototype.apply = function apply(compiler) {
+Angular2Plugin.prototype.apply = function apply(compiler) {
     // Setting Default options for the plugin
     const options = defaults({}, this.options, {
         hostname: 'localhost',
@@ -85,7 +85,7 @@ carteBlancheAngular2.prototype.apply = function apply(compiler) {
         // render something in the client area
         compilation.plugin('carte-blanche-plugin-processing', function (renderToClient) {
             renderToClient({
-                name: 'carteBlancheAngular2',
+                name: 'angular2',
                 frontendData: { options: options },
                 frontendPlugin: `${require.resolve('./frontend/frontend.js')}`,
             });
@@ -93,4 +93,4 @@ carteBlancheAngular2.prototype.apply = function apply(compiler) {
     });
 };
 
-export default carteBlancheAngular2;
+export default Angular2Plugin;

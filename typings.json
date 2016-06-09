@@ -1,6 +1,7 @@
 {
   "ambientDependencies": {
     "core-js": "github:DefinitelyTyped/DefinitelyTyped/core-js/core-js.d.ts#7de6c3dd94feaeb21f20054b9f30d5dabc5efabd",
+    "lodash": "registry:dt/lodash#3.10.0+20160330154726",
     "zone.js": "github:gdi2290/typed-zone.js#66ea8a3451542bb7798369306840e46be1d6ec89"
   }
 }

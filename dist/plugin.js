@@ -70,6 +70,13 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
         variationFolderName: 'variations'
     });
 
+    // Variations folder path
+    var projectBasePath = compiler.options.context;
+    var variationBasePath = path.join(projectBasePath, options.variationFolderName);
+    options.variationBasePath = variationBasePath;
+
+    // TODO - Run the server to get list and save variations
+
     compiler.plugin('compilation', function (compilation) {
         // Called before processing the components, mutate data to pass it around
         compilation.plugin('carte-blanche-plugin-before-processing', function (data) {});
@@ -79,7 +86,7 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
             renderToClient({
                 name: 'angular2',
                 frontendData: { options: options },
-                frontendPlugin: '' + require.resolve('./frontend/frontend.js')
+                frontendPlugin: '' + require.resolve('./frontend/index.js')
             });
         });
     });

@@ -6,6 +6,8 @@ const isString = require('lodash/isString');
 const isNaN = require('lodash/isNaN');
 const defaults = require('lodash/defaults');
 
+const type_doc_parser = require('./typedocparser.js').getComponentData;
+
 /**
  * Initial plugin function
  * 
@@ -86,7 +88,10 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
     compiler.plugin('compilation', function (compilation) {
         // Called before processing the components, mutate data to pass it around
         compilation.plugin('carte-blanche-plugin-before-processing', function (data) {
-
+            // Read the data from this component
+            var parsedData = type_doc_parser(data.source, parsedComponent => {
+                console.log(parsedComponent);
+            });
         });
         // Called after the processing, gets the renderToClient API to visually
         // render something in the client area

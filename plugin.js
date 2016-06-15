@@ -84,24 +84,27 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
     options.variationBasePath = variationBasePath;
 
     // TODO - Run the server to get list and save variations
-
-    compiler.plugin('compilation', function (compilation) {
+    compiler.plugin('compilation', (compilation) => {
         // Called before processing the components, mutate data to pass it around
-        compilation.plugin('carte-blanche-plugin-before-processing', function (data) {
+        compilation.plugin('carte-blanche-plugin-before-processing', (data) => {
             // Read the data from this component
             var parsedData = type_doc_parser(data.source, parsedComponent => {
-                console.log(parsedComponent);
+
             });
         });
         // Called after the processing, gets the renderToClient API to visually
-        // render something in the client area
-        compilation.plugin('carte-blanche-plugin-processing', function (renderToClient) {
-            renderToClient({
-                name: 'angular2',
-                frontendData: { options: options },
-                frontendPlugin: `${require.resolve('./frontend/index.js')}`,
-            });
-        });
+        compilation.plugin(
+            'carte-blanche-plugin-processing',
+            (renderToClient) => {
+                renderToClient({
+                    // TODO the name is used in the iframe & playground list
+                    // best to pass it in there instead of hardcoding it
+                    name: 'angular2',
+                    frontendData: { options },
+                    frontendPlugin: `${require.resolve('./frontend/index.js')}`, // eslint-disable-line global-require,max-len
+                });
+            }
+        );
     });
 };
 

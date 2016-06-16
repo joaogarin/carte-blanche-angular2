@@ -85,15 +85,16 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
             var parsedData = type_doc_parser(data.source, function (parsedComponent) {});
         });
         // Called after the processing, gets the renderToClient API to visually
-        // render something in the client area
         compilation.plugin('carte-blanche-plugin-processing', function (renderToClient) {
             renderToClient({
+                // TODO the name is used in the iframe & playground list
+                // best to pass it in there instead of hardcoding it
                 name: 'angular2',
                 frontendData: { options: options },
-                frontendPlugin: '' + require.resolve('./frontend/index.js')
-            });
+                frontendPlugin: '' + require.resolve('./frontend/index.js') });
         });
     });
 };
 
+// eslint-disable-line global-require,max-len
 module.exports = Angular2Plugin;

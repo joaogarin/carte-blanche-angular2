@@ -88,8 +88,8 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
         // Called before processing the components, mutate data to pass it around
         compilation.plugin('carte-blanche-plugin-before-processing', (data) => {
             // Read the data from this component
-            var parsedData = type_doc_parser(data.source, parsedComponent => {
-
+            var parsedData = type_doc_parser(data.source, (parsedComponent) => {
+                data.AngularSouce = parsedComponent;
             });
         });
         // Called after the processing, gets the renderToClient API to visually

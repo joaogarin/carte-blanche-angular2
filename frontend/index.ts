@@ -9,6 +9,13 @@
  * 
  * Should this bootstrap a full angular app? What do we get here..?
  */
+/**
+ * Polyfills
+ */
+import 'core-js/es6';
+import 'core-js/es7/reflect';
+require('zone.js/dist/zone');
+
 declare var module: any;
 (module).exports = function playgroundAngular(frontendData, pluginData, Component, componentPath) {
     console.log(frontendData);

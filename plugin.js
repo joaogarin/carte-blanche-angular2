@@ -106,6 +106,7 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
             }
         );
     });
+
 };
 
 module.exports = Angular2Plugin;

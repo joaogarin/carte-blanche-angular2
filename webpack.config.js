@@ -13,6 +13,7 @@ module.exports = {
   },
   entry: {
     //'frontend/index': './frontend/index.ts',
+    //'frontend/src/main': './frontend/src/main.ts',
     'frontend/polyfills': './frontend/polyfills.ts',
   },
   module: {

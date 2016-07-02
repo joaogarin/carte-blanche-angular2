@@ -40,6 +40,7 @@
     "es7-reflect-metadata": "^1.6.0",
     "ts-helper": "0.0.1",
     "ts-node": "^0.7.0",
+    "tsc": "^1.20150623.0",
     "tsconfig-lint": "^0.6.0",
     "tslint": "^3.5.0",
     "tslint-loader": "^2.1.0",

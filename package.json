@@ -47,7 +47,8 @@
     "typedoc": "^0.3.12",
     "typescript": "~1.8.9",
     "typings": "^0.6.9",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-merge": "^0.14.0"
   },
   "peerDependencies": {
     "carte-blanche": "^0.2.2",
@@ -57,8 +58,8 @@
     "clean-install": "rm -rf node_modules && rm -rf typings && npm install",
     "build-plugin": "BABEL_DISABLE_CACHE=1 BABEL_ENV=production babel --ignore=node_modules --out-dir='dist' plugin.js typedocparser.js",
     "build-frontend": "tsc frontend/index.ts --outDir dist/frontend",
-    "frontend": "NODE_ENV=production webpack --config webpack.config.js",
-    "build": "npm run build-plugin && npm run frontend && npm run build-frontend",
+    "frontend": "NODE_ENV=production webpack --config webpack.config.merged.js",
+    "build": "npm run build-plugin && npm run frontend",
     "test": "",
     "typings-install": "typings install",
     "postinstall": "npm run typings-install"

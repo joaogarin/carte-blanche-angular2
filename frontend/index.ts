@@ -2,4 +2,5 @@ export default function playground(frontendData, pluginData, Component, componen
   console.log(pluginData);
   console.log(Component);
   console.log(componentPath);
+  // Render components here
 }

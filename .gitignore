@@ -3,3 +3,4 @@ npm-debug.log
 dist/
 tmp/
 typings/
+tsd-debug.log

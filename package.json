@@ -6,7 +6,7 @@
     "angular2",
     "carteblanche"
   ],
-  "main": "plugin.js",
+  "main": "dist/plugin.js",
   "author": "joaogarin <joao.garin@gmail.com>",
   "license": "MIT",
   "repository": {

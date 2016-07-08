@@ -4,5 +4,5 @@ export default function playground(frontendData, pluginData, Component, componen
   console.log(Component);
   console.log(componentPath);
   // Render components here
-  return '<h1>Hello World</h1>';
+  return pluginData.source;
 }

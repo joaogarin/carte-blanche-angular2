@@ -61,7 +61,7 @@
     "clean-install": "rm -rf node_modules && rm -rf typings && npm install",
     "build-plugin": "BABEL_DISABLE_CACHE=1 BABEL_ENV=production babel --ignore=node_modules --out-dir='dist' plugin.js typedocparser.js",
     "build-frontend": "tsc frontend/index.ts --outDir dist/frontend",
-    "frontend": "NODE_ENV=production webpack --config webpack.config.merged.js",
+    "frontend": "NODE_ENV=production webpack",
     "build": "npm run build-plugin && npm run frontend",
     "test": "",
     "typings-install": "typings install",

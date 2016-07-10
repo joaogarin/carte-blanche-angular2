@@ -5,8 +5,22 @@ var webpackMerge = require('webpack-merge');
 var path = require('path');
 const MATCH_ALL_NON_RELATIVE_IMPORTS = /^\w.*$/i;
 
+const helpers = require('./helpers');
+
 var common_config = {
     module: {
+        preloaders: [
+            /**
+             * Tslint loader support for *.ts files
+             *
+             * See: https://github.com/wbuchwalter/tslint-loader
+             */
+            {
+                test: /\.ts$/,
+                loader: 'tslint-loader',
+                exclude: [helpers.root('node_modules')]
+            },
+        ],
         loaders: [
             // Support Angular 2 async routes via .async.ts
             {
@@ -26,6 +40,12 @@ var common_config = {
     plugins: [
         //new webpack.optimize.CommonsChunkPlugin({ name: ['frontend/index', 'frontend/polyfills'], minChunks: Infinity }),
     ],
+    // Other module loader config
+    tslint: {
+        emitErrors: true,
+        failOnHint: false,
+        resourcePath: 'frontend'
+    },
     //externals: [MATCH_ALL_NON_RELATIVE_IMPORTS],
     target: 'web',
     // we need this due to problems with es6-shim

@@ -72,7 +72,7 @@
   "scripts": {
     "clean-install": "rm -rf node_modules && rm -rf typings && npm install",
     "build-plugin": "BABEL_DISABLE_CACHE=1 BABEL_ENV=production babel --ignore=node_modules --out-dir='dist' plugin.js typedocparser.js",
-    "build-frontend": "tsc frontend/index.ts --outDir dist/frontend",
+    "build-frontend": "webpack --config webpack.config.js --progress --profile --colors --display-error-details --display-cached",
     "frontend": "NODE_ENV=production webpack",
     "build": "npm run build-plugin && npm run frontend",
     "webpack-test": "webpack --config webpack.test.js --progress --profile --colors --display-error-details --display-cached",

@@ -4,3 +4,4 @@ dist/
 tmp/
 typings/
 tsd-debug.log
+coverage/

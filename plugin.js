@@ -86,8 +86,7 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
     // TODO - Run the server to get list and save variations
     compiler.plugin('compilation', (compilation) => {
         // Called before processing the components, mutate data to pass it around
-        compilation.plugin('carte-blanche-plugin-before-processing', (data) => {
-            // Read the data from this component
+        compilation.plugin('carte-blanche-plugin-before-processing', function (data) {
             // Read the data from this component
             data.AngularSouce = type_doc_parser(data.source);
         });

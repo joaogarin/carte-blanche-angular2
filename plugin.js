@@ -88,9 +88,8 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
         // Called before processing the components, mutate data to pass it around
         compilation.plugin('carte-blanche-plugin-before-processing', (data) => {
             // Read the data from this component
-            type_doc_parser(data.source, (parsedComponent) => {
-                data.AngularSouce = parsedComponent;
-            });
+            // Read the data from this component
+            data.AngularSouce = type_doc_parser(data.source);
         });
         compilation.plugin('carte-blanche-plugin-assets-processing', function (assets) {
             assets.push(path.join(__dirname, './frontend/polyfills.js'));

@@ -21,46 +21,17 @@ const options = {
 
 module.exports = {
     getComponentData: function (sourceData, callback) {
-        // write source in files
-        console.log('Start reading the component with typedoc');
-        /**
-         * Write temprarily the component and return a string of component paths (what typedoc expects)
-         * 
-         * @return {Array} 
-         * An array of paths for the components to be analyzed
-         */
-        function writeTmpComponent(cb) {
-            console.log('Writing files');
-            fs.writeFile('./node_modules/carte-blanche-angular2/tmp/component.ts', sourceData, err => {
-                if (err) {
-                    return console.error(err);
-                }
-                var files_array = [];
-                files_array.push('./node_modules/carte-blanche-angular2/tmp/component.ts');
-                cb(files_array);
-            });
+        try {
+            var content = fs.writeFileSync('./node_modules/carte-blanche-angular2/tmp/component.ts', sourceData);
+        } catch (exception) {
+            console.error(exception);
         }
-
-        function readTmpComponent(cb) {
-            console.log('Reading files');
-            fs.readFile('./node_modules/carte-blanche-angular2/tmp/out.json', 'utf8', (err, data) => {
-                if (err) {
-                    return console.error(err);
-                }
-                cb(JSON.parse(data));
-            });
-        }
-
-        // Get the path to the component and analyze via typedoc
-        writeTmpComponent(files => {
-            var app = new typedoc.Application(options);
-            app.generateJson(files, './node_modules/carte-blanche-angular2/tmp/out.json');
-
-            // Read the component
-            var json_output = readTmpComponent(jsonComponent => {
-                // Return the json
-                callback(jsonComponent);
-            });
-        });
+        
+        var files_array = [];
+        files_array.push('./node_modules/carte-blanche-angular2/tmp/component.ts');
+        // lauch typedoc
+        var app = new typedoc.Application(options);
+        var written = app.generateJson(files_array, './node_modules/carte-blanche-angular2/tmp/out.json');
+        return component = fs.readFileSync('./node_modules/carte-blanche-angular2/tmp/out.json', 'utf8');
     }
 }

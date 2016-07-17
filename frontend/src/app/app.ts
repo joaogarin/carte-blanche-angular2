@@ -9,7 +9,7 @@ import {Component} from '@angular/core';
  */
 @Component({
     // The selector is what angular internally uses
-    selector: 'cb-app', // <app></app>
+    selector: '.cbapp', // <app></app>
     // The template for our app
     template: `
     <div>Application</div>

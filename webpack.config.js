@@ -35,6 +35,12 @@ var common_config = {
                 loader: 'awesome-typescript-loader',
                 exclude: [/\.(spec|e2e)\.ts$/]
             },
+            // Support for .ts files.
+            {
+                test: /\.tsx$/,
+                loader: 'awesome-typescript-loader',
+                exclude: [/\.(spec|e2e)\.ts$/]
+            },
         ],
     },
     plugins: [
@@ -68,7 +74,7 @@ var frontend_config = {
         sourceMapFilename: '[name].map',
     },
     entry: {
-        'frontend/index': './frontend/index.ts',
+        'frontend/index': './frontend/index.tsx',
     },
 };
 

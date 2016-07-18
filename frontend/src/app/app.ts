@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, Input, OnInit, ElementRef} from '@angular/core';
+import {Component, Input, OnInit, ElementRef, DynamicComponentLoader} from '@angular/core';
 
 /*
  * App Component
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     componentName: string;
     componentPath: string;
 
-    constructor(private _ref: ElementRef) {
+    constructor(private _ref: ElementRef, public dcl: DynamicComponentLoader) {
         let nativeElement = this._ref.nativeElement;
         this.componentName = nativeElement.getAttributeNode("data-component").value;
         this.componentPath = nativeElement.getAttributeNode("data-component-path").value;

@@ -13,6 +13,7 @@ export default function playground(frontendData, pluginData, Component, componen
     let AngularSource = JSON.parse(pluginData.AngularSouce);
     // Get Info from the component
     let componentName = AngularSource.children[0].children[0].name;
+    let componentSource = pluginData.source;
 
     // Bootstrap the angular app
     main();
@@ -21,5 +22,5 @@ export default function playground(frontendData, pluginData, Component, componen
      * We need to pass in the component as an input to the angular app so it can 
      * render it using Dynamic component loader
      */
-    return <div data-component={componentName} data-component-path={componentPath} className="cb-angular"></div>;
+    return <div data-component-source={componentSource} data-component={componentName} data-component-path={componentPath} className="cb-angular"></div>;
 }

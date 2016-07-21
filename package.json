@@ -33,6 +33,8 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "@angular/compiler": "^2.0.0-rc.2",
+    "angular2-template-compiler": "^0.1.9",
     "awesome-typescript-loader": "^0.19.0",
     "babel-cli": "^6.9.0",
     "babel-preset-es2015": "",
@@ -60,7 +62,7 @@
     "tslint": "^3.5.0",
     "tslint-loader": "^2.1.5",
     "typedoc": "^0.3.12",
-    "typescript": "~1.8.9",
+    "typescript": "^2.1.0-dev.20160719",
     "typings": "^0.6.9",
     "webpack": "^1.13.1",
     "webpack-merge": "^0.14.0"

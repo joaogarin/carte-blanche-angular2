@@ -3,7 +3,7 @@
  */
 import {Component, Input, OnInit, ElementRef, DynamicComponentLoader, Injector} from '@angular/core';
 
-import {IframeComponent} from './components/iframe/iframe.component.ts';
+import {DynamicOutlet} from './directives/dynamicOutlet/dynamicOutlet.directive.ts';
 
 /*
  * App Component
@@ -12,10 +12,10 @@ import {IframeComponent} from './components/iframe/iframe.component.ts';
 @Component({
     // The selector is what angular internally uses
     selector: '.cb-angular', // <app></app>
-    directives: [IframeComponent],
+    directives: [DynamicOutlet],
     // The template for our app
     template: `
-    <cb-iframe [basePath]="basePath" [componentObj]="componentObj"></cb-iframe>
+    <dynamic-outlet [basePath]="basePath" [componentObj]="componentObj"></dynamic-outlet>
     `
 })
 export class AppComponent implements OnInit {
@@ -34,9 +34,6 @@ export class AppComponent implements OnInit {
         this.componentSource = nativeElement.getAttributeNode("data-component-source").value;
 
         this.componentObj = JSON.parse(this.componentSource);
-
-        // TODO - Pass this from the plugin file
-        this.basePath = 'http://localhost:3000/carte-blanche';
     }
 
     ngOnInit() {

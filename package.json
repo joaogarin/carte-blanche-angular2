@@ -33,8 +33,6 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "@angular/compiler": "^2.0.0-rc.2",
-    "angular2-template-compiler": "^0.1.9",
     "awesome-typescript-loader": "^0.19.0",
     "babel-cli": "^6.9.0",
     "babel-preset-es2015": "",

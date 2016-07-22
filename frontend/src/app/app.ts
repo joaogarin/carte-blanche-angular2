@@ -3,7 +3,7 @@
  */
 import {Component, Input, OnInit, ElementRef, DynamicComponentLoader, Injector} from '@angular/core';
 
-import {DynamicOutlet} from './directives/dynamicOutlet/dynamicOutlet.directive.ts';
+import {DynamicOutlet} from './components/dynamicOutlet/dynamicOutlet.component.ts';
 
 /*
  * App Component

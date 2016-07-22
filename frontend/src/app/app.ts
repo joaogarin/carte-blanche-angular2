@@ -15,7 +15,7 @@ import {IframeComponent} from './components/iframe/iframe.component.ts';
     directives: [IframeComponent],
     // The template for our app
     template: `
-    <cb-iframe [basePath]="basePath"></cb-iframe>
+    <cb-iframe [basePath]="basePath" [componentObj]="componentObj"></cb-iframe>
     `
 })
 export class AppComponent implements OnInit {
@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
     componentSource: string;
     compiledComponent: any;
     basePath: string;
+    componentObj: Object;
 
     constructor(
         private _ref: ElementRef) {
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit {
         this.componentName = nativeElement.getAttributeNode("data-component").value;
         this.componentPath = nativeElement.getAttributeNode("data-component-path").value;
         this.componentSource = nativeElement.getAttributeNode("data-component-source").value;
+
+        this.componentObj = JSON.parse(this.componentSource);
 
         // TODO - Pass this from the plugin file
         this.basePath = 'http://localhost:3000/carte-blanche';

@@ -1,8 +1,10 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, Input, OnInit, ElementRef, DynamicComponentLoader, Injector} from '@angular/core';
+import {Component, Input, OnInit, ElementRef,ViewChild, ReflectiveInjector, ViewContainerRef, DynamicComponentLoader, ComponentMetadata, ComponentResolver, ComponentRef, Injector} from '@angular/core';
 import * as path from 'path';
+
+import {ComponentGenerator} from './../../services/componentGenerator.service.ts';
 
 /*
  * App Component
@@ -12,51 +14,46 @@ import * as path from 'path';
     // The selector is what angular internally uses
     selector: 'cb-iframe', // <app></app>
     // The template for our app
-    template: `<iframe scrolling="no" frameBorder="0" style="width: '100%', height: '100%'"></iframe>
+    template: `<div id="child"></div>
   `
 })
 export class IframeComponent implements OnInit {
     @Input() basePath: string;
+    @Input() componentObj: any;
     userBundle: string;
-    element: HTMLElement;
-    iframe: any;
+    cmpRef: ComponentRef<any>;
 
-    constructor(private _ref: ElementRef) {
+    constructor(
+        private _ref: ElementRef,
+        private _injector: Injector,
+        private resolver: ComponentResolver,
+        private dcl: DynamicComponentLoader,
+        private componentGenerator: ComponentGenerator,
+        private vcRef: ViewContainerRef) {
+
     }
 
     ngOnInit() {
-        console.log(this.basePath);
-        this.userBundle = path.join(this.basePath, 'user-bundle.js');
-        this.element = this._ref.nativeElement;
-        this.iframe = this.element.children[0];
-        console.log(this.iframe);
-        const doc = this.iframe.contentDocument;
-        doc.open();
-        // eslint-disable-next-line max-len
-        doc.write(this.createHTML(this.userBundle));
-        doc.close();
-    }
 
-    createHTML(userbundle) {
-        return `<!DOCTYPE html>
-    <html style="height: 100%; width: 100%; margin: 0; padding: 0;">
-        <head>
-        </head>
-        <body style="height: 100%; width: 100%; margin: 0; padding: 0;">
-        <div
-            id="root"
-            style="
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            ">
-        <cb-app>
-        </cb-app>
-        <cb-name [name]="Loading Component"></cb-name>
-        </div>
-            <script type="text/javascript" src="http://localhost:3000/main.js"></script></body>
-        </body>
-    </html>`;
+        let compObj = eval("(" + this.componentObj.children[0].children[0].decorators[0].arguments.obj + ")");
+
+        const metadata = new ComponentMetadata({
+            selector: 'dynamic-html',
+            template: compObj.template,
+        });
+        this.componentGenerator.createComponentFactory(this.resolver, metadata)
+            .then(factory => {
+                const injector = ReflectiveInjector.fromResolvedProviders([], this.vcRef.parentInjector);
+                this.cmpRef = this.vcRef.createComponent(factory, 0, injector, []);
+                this.cmpRef.instance.name = "My name is...";
+            });
+
+        /*console.log(this.componentObj);
+        //this.componentSource.children[0].children[0].decorators[0].obj
+        console.log(eval("(" + this.componentObj.children[0].children[0].decorators[0].arguments.obj + ")"));
+        let Component = this.componentGenerator.getComponent('NameComponent', this.componentObj.children[0].children[0].decorators[0].arguments.obj, {});
+        this.dcl.loadAsRoot(Component, '#child', this._injector).then(componentRef => {
+            componentRef.instance.name = "data goes here";
+        });*/
     }
 }

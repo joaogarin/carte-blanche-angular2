@@ -11,13 +11,16 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
  */
 import {AppComponent} from './app/app.ts';
 
+import {ComponentGenerator} from './app/services/componentGenerator.service.ts';
+
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
  * our Services and Providers into Angular's dependency injection
  */
 export function main() {
   return bootstrap(AppComponent, [
-    provide(LocationStrategy, { useClass: HashLocationStrategy })
+    provide(LocationStrategy, { useClass: HashLocationStrategy }),
+    ComponentGenerator
   ])
-  .catch(err => console.error(err));
+    .catch(err => console.error(err));
 }

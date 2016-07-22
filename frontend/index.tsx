@@ -22,5 +22,5 @@ export default function playground(frontendData, pluginData, Component, componen
      * We need to pass in the component as an input to the angular app so it can 
      * render it using Dynamic component loader
      */
-    return <div data-component-source={componentSource} data-component={componentName} data-component-path={componentPath} className="cb-angular"></div>;
+    return <div data-component-source={pluginData.AngularSouce} data-component={componentName} data-component-path={componentPath} className="cb-angular"></div>;
 }

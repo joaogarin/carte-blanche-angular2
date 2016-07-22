@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import {Directive, Input, OnInit, ElementRef, ViewChild, ReflectiveInjector, ViewContainerRef, DynamicComponentLoader, ComponentMetadata, ComponentResolver, ComponentRef, Injector} from '@angular/core';
+import {Component, Input, OnInit, ReflectiveInjector, ViewContainerRef, ComponentMetadata, ComponentResolver, ComponentRef} from '@angular/core';
 import * as path from 'path';
 
 import {ComponentGenerator} from './../../services/componentGenerator.service.ts';
@@ -10,8 +10,9 @@ import {ComponentGenerator} from './../../services/componentGenerator.service.ts
  * App Component
  * Top Level Component
  */
-@Directive({
+@Component({
     selector: 'dynamic-outlet',
+    template: `<div></div>`,
 })
 export class DynamicOutlet implements OnInit {
     @Input() basePath: string;

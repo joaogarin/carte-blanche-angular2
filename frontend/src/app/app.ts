@@ -1,9 +1,9 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, Input, OnInit, ElementRef, DynamicComponentLoader, Injector} from '@angular/core';
+import { Component, Input, OnInit, ElementRef, DynamicComponentLoader, Injector } from '@angular/core';
 
-import {DynamicOutlet} from './components/dynamicOutlet/dynamicOutlet.component.ts';
+import { PlaylistList } from './components/playlistList/playlistList.component.ts';
 
 /*
  * App Component
@@ -12,10 +12,10 @@ import {DynamicOutlet} from './components/dynamicOutlet/dynamicOutlet.component.
 @Component({
     // The selector is what angular internally uses
     selector: '.cb-angular', // <app></app>
-    directives: [DynamicOutlet],
+    directives: [PlaylistList],
     // The template for our app
     template: `
-    <dynamic-outlet [basePath]="basePath" [componentObj]="componentObj"></dynamic-outlet>
+    <cb-playlist-list [componentObj]="componentObj"></cb-playlist-list>
     `
 })
 export class AppComponent implements OnInit {

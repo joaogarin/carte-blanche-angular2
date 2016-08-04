@@ -27,22 +27,38 @@ export class DynamicOutlet implements OnInit {
 
   ngOnInit() {
     // Read the @component decorator from the original component
-    let compObj = eval("(" + this.componentObj.children[0].children[0].decorators[0].arguments.obj + ")");
 
-    const metadata = new ComponentMetadata({
-      selector: 'dynamic-outlet',
-      styles: [compObj.styles[0]],
-      template: compObj.template,
-    });
-    this.componentGenerator.createComponentFactory(this.resolver, metadata)
-      .then(factory => {
-        const injector = ReflectiveInjector.fromResolvedProviders([], this.vcRef.parentInjector);
-        this.cmpRef = this.vcRef.createComponent(factory, 0, injector, []);
+    let components = this.componentObj.elements;
+    console.log(this.componentObj);
 
-        // This has to be dynamic for every input
-        this.cmpRef.instance.description = 'Hot reloading makes for a great Developer Experience, but we can do even better.';
-        this.cmpRef.instance.image = 'https://hd.unsplash.com/photo-1468245856972-a0333f3f8293';
-        this.cmpRef.instance.name = "Carte blanche angular";
+    components.forEach(element => {
+
+      let componentDecorator = eval("(" + element.componentDecorators[0].arguments.obj + ")");
+
+      const metadata = new ComponentMetadata({
+        selector: 'dynamic-outlet',
+        styles: [componentDecorator.styles[0]],
+        template: componentDecorator.template,
       });
+
+      this.componentGenerator.createComponentFactory(this.resolver, metadata)
+        .then(factory => {
+          const injector = ReflectiveInjector.fromResolvedProviders([], this.vcRef.parentInjector);
+          this.cmpRef = this.vcRef.createComponent(factory, 0, injector, []);
+
+          element.inputs.forEach(input => {
+            // This has to be dynamic for every input
+            if (input.name == 'description') {
+              this.cmpRef.instance[input.name] = 'Hot reloading makes for a great Developer Experience, but we can do even better.';
+            }
+            if (input.name == 'name') {
+              this.cmpRef.instance[input.name] = 'Carte blanche angular';
+            }
+            if (input.name == 'image') {
+              this.cmpRef.instance[input.name] = 'https://hd.unsplash.com/photo-1468245856972-a0333f3f8293';
+            }
+          });
+        });
+    });
   }
 }

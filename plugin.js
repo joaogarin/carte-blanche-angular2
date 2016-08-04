@@ -6,7 +6,10 @@ const isString = require('lodash/isString');
 const isNaN = require('lodash/isNaN');
 const defaults = require('lodash/defaults');
 
-const type_doc_parser = require('./typedocparser.js').getComponentData;
+
+const typedocparse = require('./typedocparser.js');
+const type_doc_parser = typedocparse.getComponentData;
+const type_doc_analyzer = typedocparse.resolveComponentInfo;
 
 /**
  * Initial plugin function
@@ -88,7 +91,9 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
         // Called before processing the components, mutate data to pass it around
         compilation.plugin('carte-blanche-plugin-before-processing', function (data) {
             // Read the data from this component
-            data.AngularSouce = type_doc_parser(data.source);
+            let AngularSource = type_doc_parser(data.source);
+            data.AngularSouce = AngularSource;
+            data.AngularSourceParsed = type_doc_analyzer(JSON.parse(AngularSource));
         });
         compilation.plugin('carte-blanche-plugin-assets-processing', function (assets) {
             assets.push(path.join(__dirname, './frontend/polyfills.js'));

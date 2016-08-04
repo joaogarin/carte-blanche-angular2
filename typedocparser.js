@@ -45,12 +45,27 @@ function checkChildren(object) {
     return analyzedObject;
 }
 
+/**
+ * Get some basic info on the component like name, children properties etc.
+ */
 function getComponentInfo(object) {
-    if (typeof object.children[0] != 'undefined') {
-        return object.children[0];
+    if (typeof object.children != 'undefined' && object.children.length > 0) {
+        // Go throguh each children and return the class that has a component decorator (the component)
+        // right now only works if the decorator is right on top of the component !
+        let componentArray = object.children.filter(val => {
+            return val.kindString == 'Class' && (typeof val.decorators.length != 'undefined' && val.decorators[0].name == 'Component');
+        });
+        if (componentArray.length > 0) {
+            // Return the first component. There shouldn't be multiple components in one file.
+            return componentArray[0];
+        }
     }
 }
 
+/**
+ * Get the component decorators
+ * This will be used to render the component in the frontend dynamically.
+ */
 function getChildComponentDecorators(object) {
     let componentDecorators = [];
     if (typeof object.children[0].decorators != 'undefied' && object.children[0].decorators.length > 0) {

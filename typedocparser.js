@@ -21,6 +21,25 @@ var options = {
     'module': 'commonjs'
 };
 
+/**
+ * Get the component raw data from typedoc
+ */
+function getComponentData(sourceData, callback) {
+    let app = new typedoc.Application(options),
+        files_array = ['./node_modules/carte-blanche-angular2/tmp/component.ts'];
+    try {
+        var content = fs.writeFileSync('./node_modules/carte-blanche-angular2/tmp/component.ts', sourceData);
+    } catch (exception) {
+        console.error(exception);
+    }
+    // lauch typedoc
+    app.generateJson(files_array, './node_modules/carte-blanche-angular2/tmp/out.json');
+    return fs.readFileSync('./node_modules/carte-blanche-angular2/tmp/out.json', 'utf8');
+}
+
+/**
+ * Resolve and clean the component data that comes from typedoc
+ */
 function checkChildren(object) {
     let analyzedObject = {
         elements: [],
@@ -28,9 +47,9 @@ function checkChildren(object) {
     // go through every child and fetch component decorators
     if (typeof object.children != 'undefined') {
         object.children.forEach(val => {
-            let componentDecorators = getChildComponentDecorators(val);
-            let componentInputs = getChildComponentInputs(val);
             let componentInfo = getComponentInfo(val);
+            let componentDecorators = getChildComponentDecorators(componentInfo);
+            let componentInputs = getChildComponentInputs(componentInfo);
 
             // Create the element and put it in the array
             let element = {
@@ -66,10 +85,10 @@ function getComponentInfo(object) {
  * Get the component decorators
  * This will be used to render the component in the frontend dynamically.
  */
-function getChildComponentDecorators(object) {
+function getChildComponentDecorators(component) {
     let componentDecorators = [];
-    if (typeof object.children[0].decorators != 'undefied' && object.children[0].decorators.length > 0) {
-        object.children[0].decorators.forEach((val) => {
+    if (typeof component.decorators != 'undefied' && component.decorators.length > 0) {
+        component.decorators.forEach((val) => {
             if (val.name = 'Component') {
                 componentDecorators = [...componentDecorators, val];
             }
@@ -78,11 +97,15 @@ function getChildComponentDecorators(object) {
     return componentDecorators;
 }
 
-function getChildComponentInputs(object) {
+/**
+ * Get the component input properties
+ * This will be used to render the correspondent component inputs and variations of them
+ */
+function getChildComponentInputs(component) {
     let componentInputs = [];
 
-    if (typeof object.children[0].children != 'undefied' && object.children[0].children.length > 0) {
-        let objectChildren = object.children[0].children.filter((item) => {
+    if (typeof component.children != 'undefied' && component.children.length > 0) {
+        let objectChildren = component.children.filter((item) => {
             return item.kindString == 'Property' && typeof (item.decorators != 'undefined' && item.decorators.length > 0);
         }).forEach((input) => {
             componentInputs = [...componentInputs, input];
@@ -91,21 +114,12 @@ function getChildComponentInputs(object) {
     return componentInputs;
 }
 
+/**
+ * Get the clean component information including component info, inputs 
+ * and component decorator.
+ */
 function resolveComponentInfo(data) {
     return checkChildren(data);
-}
-
-function getComponentData(sourceData, callback) {
-    let app = new typedoc.Application(options),
-        files_array = ['./node_modules/carte-blanche-angular2/tmp/component.ts'];
-    try {
-        var content = fs.writeFileSync('./node_modules/carte-blanche-angular2/tmp/component.ts', sourceData);
-    } catch (exception) {
-        console.error(exception);
-    }
-    // lauch typedoc
-    app.generateJson(files_array, './node_modules/carte-blanche-angular2/tmp/out.json');
-    return fs.readFileSync('./node_modules/carte-blanche-angular2/tmp/out.json', 'utf8');
 }
 
 // export functions

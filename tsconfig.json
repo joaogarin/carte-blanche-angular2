@@ -8,13 +8,12 @@
     "jsx": "react"
   },
   "exclude": [
-    "node_modules",
-    "typings/main.d.ts",
-    "typings/main"
+    "node_modules"
   ],
   "filesGlob": [
     "./frontend/**/*.ts",
-    "typings/browser.d.ts"
+    "./typedocparser.ts",
+    "./typings/index.d.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

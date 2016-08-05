@@ -11,7 +11,7 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
  */
 import {AppComponent} from './app/app.ts';
 
-import {ComponentGenerator} from './app/services/componentGenerator.service.ts';
+import {ComponentGenerator, ComponentMetadataResolver} from './app/services/index.ts';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -20,7 +20,8 @@ import {ComponentGenerator} from './app/services/componentGenerator.service.ts';
 export function main() {
   return bootstrap(AppComponent, [
     provide(LocationStrategy, { useClass: HashLocationStrategy }),
-    ComponentGenerator
+    ComponentGenerator,
+    ComponentMetadataResolver,
   ])
     .catch(err => console.error(err));
 }

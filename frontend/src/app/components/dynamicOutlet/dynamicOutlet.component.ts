@@ -4,34 +4,44 @@
 import {Component, Input, OnInit, ReflectiveInjector, ViewContainerRef, ComponentMetadata, ComponentResolver, ComponentRef} from '@angular/core';
 import * as path from 'path';
 
-import {ComponentGenerator} from './../../services/componentGenerator.service.ts';
-
+import { ComponentGenerator, ComponentMetadataResolver } from './../../services/index.ts';
+import { ButtonComponent } from './../common/index.ts';
 /*
  * Dynamic outlet to generate components
  */
 @Component({
   selector: 'cb-dynamic-outlet',
-  template: `<div></div>`,
+  styles: [`
+  .button-wrapper {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  `],
+  directives: [ButtonComponent],
+  template: `<div class="dynamic-comp"></div>
+  <div class="button-wrapper"><cb-button (click)="randomize()">Randomize</cb-button></div>`,
 })
 export class DynamicOutlet implements OnInit {
   @Input() componentObj: any;
-
   cmpRef: ComponentRef<any>;
+
+  components: Array<any>;
 
   constructor(
     private resolver: ComponentResolver,
     private componentGenerator: ComponentGenerator,
+    private metaDataResolver: ComponentMetadataResolver,
     private vcRef: ViewContainerRef) {
-
   }
 
   ngOnInit() {
     // Read the @component decorator from the original component
+    this.components = this.componentObj.elements;
+    this.renderComponent();
+  }
 
-    let components = this.componentObj.elements;
-    console.log(this.componentObj);
-
-    components.forEach(element => {
+  renderComponent() {
+    this.components.forEach(element => {
 
       let componentDecorator = eval("(" + element.componentDecorators[0].arguments.obj + ")");
 
@@ -44,21 +54,23 @@ export class DynamicOutlet implements OnInit {
       this.componentGenerator.createComponentFactory(this.resolver, metadata)
         .then(factory => {
           const injector = ReflectiveInjector.fromResolvedProviders([], this.vcRef.parentInjector);
-          this.cmpRef = this.vcRef.createComponent(factory, 0, injector, []);
+          this.cmpRef = this.vcRef.createComponent(factory, -1, injector, []);
 
           element.inputs.forEach(input => {
             // This has to be dynamic for every input
-            if (input.name == 'description') {
-              this.cmpRef.instance[input.name] = 'Hot reloading makes for a great Developer Experience, but we can do even better.';
-            }
-            if (input.name == 'name') {
-              this.cmpRef.instance[input.name] = 'Carte blanche angular';
-            }
-            if (input.name == 'image') {
-              this.cmpRef.instance[input.name] = 'https://hd.unsplash.com/photo-1468245856972-a0333f3f8293';
-            }
+            this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.name);
           });
         });
+    });
+  }
+
+  randomize() {
+    // Render the component again
+    this.components.forEach(element => {
+      element.inputs.forEach(input => {
+        // This has to be dynamic for every input
+        this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.name);
+      });
     });
   }
 }

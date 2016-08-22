@@ -26,7 +26,7 @@
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@angular/platform-server": "2.0.0-rc.4",
     "core-js": "^2.2.2",
-    "rxjs": "^5.0.0-beta.6",
+    "rxjs": "5.0.0-beta.6",
     "zone.js": "^0.6.12",
     "lodash": "^4.13.1",
     "mkdirp": "^0.5.1",

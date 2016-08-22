@@ -3,11 +3,9 @@
     "core-js": "registry:dt/core-js#0.0.0+20160602141332",
     "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
     "node": "registry:dt/node#6.0.0+20160802155038",
+    "react": "registry:dt/react#0.14.0+20160817201227",
     "source-map": "registry:dt/source-map#0.0.0+20160317120654",
     "uglify-js": "registry:dt/uglify-js#2.6.1+20160316155526",
     "webpack": "registry:dt/webpack#1.12.9+20160724112410"
-  },
-  "dependencies": {
-    "react": "registry:npm/react#15.0.1+20160601175240"
   }
 }

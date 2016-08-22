@@ -4,11 +4,12 @@
 import { Component, Input } from '@angular/core';
 
 import { Playlist } from './../playlist/playlist.component.ts';
+import { CreateVariationButtonComponent } from './../common/index.ts';
 
 @Component({
     // The selector is what angular internally uses
     selector: 'cb-playlist-list',
-    directives: [Playlist],
+    directives: [Playlist, CreateVariationButtonComponent],
     styles: [`
     .wrapper {
       background-color: #f4f7f9;
@@ -20,6 +21,7 @@ import { Playlist } from './../playlist/playlist.component.ts';
   `],
     template: `<div class="wrapper">
         <cb-playlist [componentObj]="componentObj"></cb-playlist>
+        <cb-create-variation-button></cb-create-variation-button>
     </div>`,
 })
 export class PlaylistList {

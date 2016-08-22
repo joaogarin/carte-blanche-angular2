@@ -5,7 +5,7 @@ import {Component, Input, OnInit, ReflectiveInjector, ViewContainerRef, Componen
 import * as path from 'path';
 
 import { ComponentGenerator, ComponentMetadataResolver } from './../../services/index.ts';
-import { ButtonComponent } from './../common/index.ts';
+import { RandomizeButtonComponent } from './../common/index.ts';
 /*
  * Dynamic outlet to generate components
  */
@@ -17,9 +17,9 @@ import { ButtonComponent } from './../common/index.ts';
     margin-top: 20px;
   }
   `],
-  directives: [ButtonComponent],
+  directives: [RandomizeButtonComponent],
   template: `<div class="dynamic-comp"></div>
-  <div class="button-wrapper"><cb-button (click)="randomize()">Randomize</cb-button></div>`,
+  <div class="button-wrapper"><cb-randomize-button (click)="randomize()">Randomize</cb-randomize-button></div>`,
 })
 export class DynamicOutlet implements OnInit {
   @Input() componentObj: any;

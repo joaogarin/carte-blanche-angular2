@@ -7,7 +7,7 @@ import {Component, Output} from '@angular/core';
  * Dynamic outlet to generate components
  */
 @Component({
-    selector: 'cb-button',
+    selector: 'cb-randomize-button',
     styles: [`
     .randomize-button {
       font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
@@ -25,7 +25,7 @@ import {Component, Output} from '@angular/core';
     `],
     template: `<button class="randomize-button" (click)="randomize()"><ng-content></ng-content></button>`,
 })
-export class ButtonComponent {
+export class RandomizeButtonComponent {
     constructor() {
     }
 }

@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
+import { metadataTypes } from './metaTypes.ts';
+import * as faker from 'faker';
 
 @Injectable()
 export class ComponentMetadataResolver {
-    metadataTypes: Array<Object> = [
-        'string', 'boolean', 'number'
-    ];
 
     shortStrings: Object = {
         types: ['name', 'text'],
@@ -39,10 +38,22 @@ export class ComponentMetadataResolver {
             console.log(val);
             return val.values;
         })[0];
-        
+
         if (metaValues.length > 0) {
             let random = (Math.random() * metaValues.length);
             return metaValues[Math.floor(random)];
+        }
+    }
+
+    getRandomData(type) {
+        console.log(type);
+        switch (type) {
+            case 'string':
+                console.log(faker.lorem.sentence());
+                break;
+            case 'avatar':
+                console.log(faker.image.avatar());
+                break;
         }
     }
 }

@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, Output} from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 
 /*
  * Dynamic outlet to generate components
@@ -23,9 +23,14 @@ import {Component, Output} from '@angular/core';
       color: white;
     }
     `],
-    template: `<button class="randomize-button" (click)="randomize()"><ng-content></ng-content></button>`,
+    template: `<button class="randomize-button" (click)="selectRandom()"><ng-content></ng-content></button>`,
 })
 export class RandomizeButtonComponent {
+    @Output() randomize = new EventEmitter();
     constructor() {
+    }
+
+    selectRandom() {
+        this.randomize.emit('randomize');
     }
 }

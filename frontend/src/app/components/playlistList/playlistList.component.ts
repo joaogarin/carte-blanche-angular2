@@ -21,7 +21,6 @@ import { CreateVariationButtonComponent } from './../common/index.ts';
   `],
     template: `<div class="wrapper">
         <cb-playlist [componentObj]="componentObj"></cb-playlist>
-        <cb-create-variation-button></cb-create-variation-button>
     </div>`,
 })
 export class PlaylistList {

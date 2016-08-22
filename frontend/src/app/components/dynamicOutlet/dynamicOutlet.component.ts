@@ -19,7 +19,7 @@ import { RandomizeButtonComponent } from './../common/index.ts';
   `],
   directives: [RandomizeButtonComponent],
   template: `<div class="dynamic-comp"></div>
-  <div class="button-wrapper"><cb-randomize-button (click)="randomize()">Randomize</cb-randomize-button></div>`,
+  <div class="button-wrapper"><cb-randomize-button (randomize)="randomize()">Randomize</cb-randomize-button></div>`,
 })
 export class DynamicOutlet implements OnInit {
   @Input() componentObj: any;
@@ -69,7 +69,9 @@ export class DynamicOutlet implements OnInit {
     this.components.forEach(element => {
       element.inputs.forEach(input => {
         // This has to be dynamic for every input
+        let inputType = input.type.name;
         this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.name);
+        this.metaDataResolver.getRandomData(inputType);
       });
     });
   }

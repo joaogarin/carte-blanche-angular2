@@ -4,11 +4,6 @@ import {main} from './src/main.ts';
 
 export default function playground(frontendData, pluginData, Component, componentPath) {
 
-    console.log(pluginData);
-    console.log(JSON.parse(pluginData.AngularSouce));
-    console.log(Component);
-    console.log(componentPath);
-
     // Parse the angular source from typedoc
     let AngularSource = JSON.stringify(pluginData.AngularSourceParsed);
     // Get Info from the component

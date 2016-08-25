@@ -22,10 +22,8 @@ import { RandomizeButtonComponent } from './../common/index.ts';
   <div class="button-wrapper"><cb-randomize-button (randomize)="randomize()">Randomize</cb-randomize-button></div>`,
 })
 export class DynamicOutlet implements OnInit {
-  @Input() componentObj: any;
+  @Input() component: any;
   cmpRef: ComponentRef<any>;
-
-  components: Array<any>;
 
   constructor(
     private resolver: ComponentResolver,
@@ -35,44 +33,47 @@ export class DynamicOutlet implements OnInit {
   }
 
   ngOnInit() {
-    // Read the @component decorator from the original component
-    this.components = this.componentObj.elements;
     this.renderComponent();
   }
 
+  /**
+   * Use the componentGenerator service to render 
+   * the component Dynamically
+   * 
+   * Will also use the inputs gathered from typedoc and call the component metadata resolver to 
+   * generate some sample data.
+   */
   renderComponent() {
-    this.components.forEach(element => {
+    let componentDecorator = eval("(" + this.component.componentDecorators[0].arguments.obj + ")");
 
-      let componentDecorator = eval("(" + element.componentDecorators[0].arguments.obj + ")");
-
-      const metadata = new ComponentMetadata({
-        selector: 'dynamic-outlet',
-        styles: [componentDecorator.styles[0]],
-        template: componentDecorator.template,
-      });
-
-      this.componentGenerator.createComponentFactory(this.resolver, metadata)
-        .then(factory => {
-          const injector = ReflectiveInjector.fromResolvedProviders([], this.vcRef.parentInjector);
-          this.cmpRef = this.vcRef.createComponent(factory, -1, injector, []);
-
-          element.inputs.forEach(input => {
-            // This has to be dynamic for every input
-            this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.name);
-          });
-        });
+    const metadata = new ComponentMetadata({
+      selector: 'dynamic-outlet',
+      styles: [componentDecorator.styles[0]],
+      template: componentDecorator.template,
     });
+
+    this.componentGenerator.createComponentFactory(this.resolver, metadata)
+      .then(factory => {
+        const injector = ReflectiveInjector.fromResolvedProviders([], this.vcRef.parentInjector);
+        this.cmpRef = this.vcRef.createComponent(factory, -1, injector, []);
+
+        this.component.inputs.forEach(input => {
+          // This has to be dynamic for every input
+          this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.name);
+        });
+      });
   }
 
+  /**
+   * Change the input values by calling the component metadata resolver service
+   */
   randomize() {
     // Render the component again
-    this.components.forEach(element => {
-      element.inputs.forEach(input => {
-        // This has to be dynamic for every input
-        this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.name);
-        this.cmpRef.changeDetectorRef.detectChanges();
-        //this.metaDataResolver.getFakerData(inputType);
-      });
+    this.component.inputs.forEach(input => {
+      // This has to be dynamic for every input
+      this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.name);
+      this.cmpRef.changeDetectorRef.detectChanges();
+      //this.metaDataResolver.getFakerData(inputType);
     });
   }
 }

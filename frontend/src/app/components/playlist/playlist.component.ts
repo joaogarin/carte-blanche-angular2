@@ -21,11 +21,11 @@ import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
     }
   `],
     template: `<div class="wrapper">
-        <cb-dynamic-outlet [componentObj]="componentObj"></cb-dynamic-outlet>
+        <cb-dynamic-outlet [component]="component"></cb-dynamic-outlet>
     </div>`,
 })
 export class Playlist {
-    @Input() componentObj: any;
+    @Input() component: any;
     constructor() {
 
     }

@@ -6,6 +6,7 @@ import {NgModule} from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { COMPILER_PROVIDERS } from '@angular/compiler';
 
 /*
  * App Component
@@ -19,13 +20,14 @@ import {ComponentGenerator, ComponentMetadataResolver} from './app/services/inde
   declarations: [AppComponent], // directives, components, and pipes owned by this NgModule
   imports: [BrowserModule],
   providers: [
+    ...COMPILER_PROVIDERS,
     provide(LocationStrategy, { useClass: HashLocationStrategy }),
     ComponentGenerator,
     ComponentMetadataResolver,
   ], // additional providers
   bootstrap: [AppComponent],
 })
-class MyAppModule { }
+export class MyAppModule { }
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject

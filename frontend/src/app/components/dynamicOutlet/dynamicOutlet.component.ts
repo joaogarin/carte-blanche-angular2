@@ -69,9 +69,9 @@ export class DynamicOutlet implements OnInit {
     this.components.forEach(element => {
       element.inputs.forEach(input => {
         // This has to be dynamic for every input
-        let inputType = input.type.name;
         this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.name);
-        this.metaDataResolver.getRandomData(inputType);
+        this.cmpRef.changeDetectorRef.detectChanges();
+        //this.metaDataResolver.getFakerData(inputType);
       });
     });
   }

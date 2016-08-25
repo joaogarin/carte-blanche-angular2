@@ -7,53 +7,50 @@ export class ComponentMetadataResolver {
 
     shortStrings: Object = {
         types: ['name', 'text'],
-        values: ['Carte Blanche', 'Carte Blanche Angular2', 'Meet the new Carte Blanche', 'Angular2 Plugin']
+        value: 'words',
     };
 
     longStrings: Object = {
         types: ['description'],
-        values: ['Carte Blanche is a new Angular2 plugin on top of webpack',
-            'Carte Blanche Angular2 based on webpack the ultimate plugin',
-            'Meet the new Carte Blanche plugin the new way of developing components',
-        ]
+        value: 'sentence',
     };
 
     images: Object = {
         types: ['image'],
-        values: ['http://localhost/groovy/dist/images/dashboardbanner.jpg',
-            'http://localhost/groovy/dist/images/bgprofile.jpg',
-            'http://localhost/groovy/dist/images/error-500.jpg',
-            'http://localhost/groovy/dist/images/error-404.jpg',
-        ]
+        value: 'image',
     };
 
     metaData = [this.shortStrings, this.longStrings, this.images];
 
     getMetadata(type) {
         //get the right metadata for this type
-        let metaValues = this.metaData.filter((item: any) => {
+        let metaValue = this.metaData.filter((item: any) => {
             let types: Array<Object> = item.types;
             return types.indexOf(type) > -1;
         }).map((val: any) => {
-            console.log(val);
-            return val.values;
+            return val.value;
         })[0];
 
-        if (metaValues.length > 0) {
-            let random = (Math.random() * metaValues.length);
-            return metaValues[Math.floor(random)];
-        }
+        return this.getFakerData(metaValue);
     }
 
-    getRandomData(type) {
-        console.log(type);
+    /**
+     * Use faker to generate metadata for the inputs
+     * @param {type} 
+     * the type of input to generate metadata for
+     */
+    getFakerData(type) {
         switch (type) {
-            case 'string':
-                console.log(faker.lorem.sentence());
-                break;
-            case 'avatar':
-                console.log(faker.image.avatar());
-                break;
+            case 'sentence':
+                return faker.lorem.sentence();
+            case 'image':
+                let width = Math.floor(Math.random() * (500 - 300 + 1) + 300);
+                let height = Math.floor(Math.random() * (300 - 250 + 1) + 300);
+                return faker.image.imageUrl(width, height);
+            case 'words':
+                return faker.lorem.words();
+            default:
+                return null;
         }
     }
 }

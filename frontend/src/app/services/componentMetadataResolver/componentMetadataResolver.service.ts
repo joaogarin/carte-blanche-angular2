@@ -67,7 +67,7 @@ export class ComponentMetadataResolver {
         let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
         let post_options = new RequestOptions({ headers: headers });
         let body = JSON.stringify(data);
-
+        
         this.http.post(
             `http://${host}:${port}/components/${componentPath}`,
             body,

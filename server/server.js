@@ -221,7 +221,7 @@ var start = (projectBasePath, variationsBasePath, options) => {
 
     fs.closeSync(fs.openSync(componentMetaPath, 'w'));
     try {
-      var content = 'module.exports = ' + JSON.stringify(req.body);
+      var content = 'module.exports = ' + req.body.code;
       fs.writeFileSync(componentMetaPath, content);
     } catch (error) {
       res.status(500).send('');

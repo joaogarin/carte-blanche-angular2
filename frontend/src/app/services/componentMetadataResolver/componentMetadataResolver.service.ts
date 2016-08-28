@@ -4,6 +4,8 @@ import { metadataTypes } from './metaTypes.ts';
 import * as faker from 'faker';
 import * as axios from 'axios';
 
+import { customMetadataToCode } from './../../utils/customMetadataToCode.ts';
+
 @Injectable()
 export class ComponentMetadataResolver {
 
@@ -66,8 +68,10 @@ export class ComponentMetadataResolver {
     saveCustomMetaData(host, port, componentPath, data) {
         let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
         let post_options = new RequestOptions({ headers: headers });
-        let body = JSON.stringify(data);
-        
+        let body = JSON.stringify({
+            code: customMetadataToCode(data),
+        });
+
         this.http.post(
             `http://${host}:${port}/components/${componentPath}`,
             body,

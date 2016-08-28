@@ -15,7 +15,7 @@ import { PlaylistList } from './components/playlistList/playlistList.component.t
     directives: [PlaylistList],
     // The template for our app
     template: `
-    <cb-playlist-list [componentName]="componentName" [componentObj]="componentObj"></cb-playlist-list>
+    <cb-playlist-list [componentPath]="componentPath" [componentName]="componentName" [componentObj]="componentObj"></cb-playlist-list>
     `
 })
 export class AppComponent implements OnInit {

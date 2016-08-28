@@ -5,11 +5,12 @@ import { Component, Input } from '@angular/core';
 
 import { Playlist } from './../playlist/playlist.component.ts';
 import { CreateVariationButtonComponent, ModalComponent, EditButtonComponent } from './../common/index.ts';
+import { customMetadataFormComponent } from './../customMetadataForm/customMetadataForm.component.ts';
 
 @Component({
     // The selector is what angular internally uses
     selector: 'cb-playlist-list',
-    directives: [Playlist, CreateVariationButtonComponent, ModalComponent, EditButtonComponent],
+    directives: [Playlist, CreateVariationButtonComponent, ModalComponent, EditButtonComponent, customMetadataFormComponent],
     styles: [`
     .wrapper {
         background-color: #f4f7f9;
@@ -28,12 +29,16 @@ import { CreateVariationButtonComponent, ModalComponent, EditButtonComponent } f
             {{componentName}} <cb-edit-button [size]="24" (click)="toggleModal()"></cb-edit-button>
         </h2>
         <cb-playlist [component]="component"></cb-playlist>
-        <cb-modal [visible]="showModal" (onClose)="toggleModal()">Hello Modal</cb-modal>
+        <cb-modal [visible]="showModal" (onClose)="toggleModal()">
+            <cb-customm-metadata-form [componentPath]="componentPath" [component]="component"></cb-customm-metadata-form>
+        </cb-modal>
     </div>`,
 })
 export class PlaylistList {
     @Input() componentObj: any;
     @Input() componentName: string;
+    @Input() componentPath: string;
+
     component: any;
     showModal: boolean = false;
 

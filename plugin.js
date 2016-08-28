@@ -1,6 +1,7 @@
 /**
  * carte blanche implementation for angular2
  */
+const fork = require('child_process').fork;
 const path = require('path');
 const isString = require('lodash/isString');
 const isNaN = require('lodash/isNaN');
@@ -69,6 +70,21 @@ function Angular2Plugin(options) {
 }
 
 /**
+ * Kill a Node.js process
+ */
+function killProcess(proc, err) {
+    proc.kill('SIGINT');
+    if (err) {
+        console.log('Uncaught Exception...'); // eslint-disable-line no-console
+        console.log(err.stack); // eslint-disable-line no-console
+        process.exit(1);
+    } else {
+        process.exit();
+    }
+}
+
+
+/**
  * Initializes the plugin, called after the main function above
  */
 Angular2Plugin.prototype.apply = function apply(compiler) {
@@ -86,7 +102,21 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
     const variationBasePath = path.join(projectBasePath, options.variationFolderName);
     options.variationBasePath = variationBasePath;
 
-    // TODO - Run the server to get list and save variations
+    const server = fork(path.join(__dirname, './server/run.js'), [
+        projectBasePath, // process.argv[2]
+        JSON.stringify(options), // process.argv[3]
+    ]);
+
+    // Prevent the process from exiting immediately
+    process.stdin.resume();
+
+    // When the plugin exits for any reason, kill the forked Node.js process
+    // with the server. (exit = process.exit(), SIGINT = CTRL+C, uncaughtException =
+    // error in the code)
+    process.on('exit', killProcess.bind(null, server));
+    process.on('SIGINT', killProcess.bind(null, server));
+    process.on('uncaughtException', killProcess.bind(null, server));
+
     compiler.plugin('compilation', (compilation) => {
         // Called before processing the components, mutate data to pass it around
         compilation.plugin('carte-blanche-plugin-before-processing', function (data) {

@@ -24,6 +24,7 @@ import { NgClass } from '@angular/common';
     }
 
     .modal {
+        padding: 2rem;
         width: 90%;
         width: 90vw;
         height: 90%;

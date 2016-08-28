@@ -1,9 +1,15 @@
 import {Injectable} from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { metadataTypes } from './metaTypes.ts';
 import * as faker from 'faker';
+import * as axios from 'axios';
 
 @Injectable()
 export class ComponentMetadataResolver {
+
+    constructor(private http: Http) {
+
+    }
 
     shortStrings: Object = {
         types: ['name', 'text'],
@@ -52,5 +58,26 @@ export class ComponentMetadataResolver {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Save the component custom metadata
+     */
+    saveCustomMetaData(host, port, componentPath, data) {
+        let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
+        let post_options = new RequestOptions({ headers: headers });
+        let body = JSON.stringify(data);
+
+        this.http.post(
+            `http://${host}:${port}/components/${componentPath}`,
+            body,
+            post_options)
+            .subscribe(
+            response => {
+                console.log(response);
+            },
+            err => console.error(err),
+            () => console.log('')
+            );
     }
 }

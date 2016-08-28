@@ -7,6 +7,7 @@ import { BrowserModule }  from '@angular/platform-browser';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { COMPILER_PROVIDERS } from '@angular/compiler';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 /*
  * App Component
@@ -20,6 +21,7 @@ import {ComponentGenerator, ComponentMetadataResolver} from './app/services/inde
   declarations: [AppComponent], // directives, components, and pipes owned by this NgModule
   imports: [BrowserModule],
   providers: [
+    ...HTTP_PROVIDERS,
     ...COMPILER_PROVIDERS,
     provide(LocationStrategy, { useClass: HashLocationStrategy }),
     ComponentGenerator,

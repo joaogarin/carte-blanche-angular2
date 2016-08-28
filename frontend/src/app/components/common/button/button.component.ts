@@ -31,16 +31,19 @@ import { NgClass } from '@angular/common';
         color: white;
     }
     `],
-    template: `<button class="base" [ngClass]="getButtonClasses()"><ng-content></ng-content></button>`,
+    template: `<button class="base" [ngClass]="getButtonClasses()" [disabled]="disabled"><ng-content></ng-content></button>`,
 })
 export class ButtonComponent {
-    @Input() type: string;
+    @Input() buttonType: string;
+    @Input() disabled: boolean = false;
 
-    constructor() {}
+    constructor() {
+
+    }
 
     getButtonClasses() {
         return {
-            'primary': this.type === 'primary'
+            'primary': this.buttonType === 'primary'
         };
     }
 }

@@ -11,7 +11,7 @@ import { ButtonComponent } from './../index.ts';
     selector: 'cb-randomize-button',
     directives: [ButtonComponent],
     styles: [``],
-    template: `<cb-button [type]="buttonClass" (click)="selectRandom()"><ng-content></ng-content></cb-button>`,
+    template: `<cb-button [buttonType]="buttonClass" (click)="selectRandom()"><ng-content></ng-content></cb-button>`,
 })
 export class RandomizeButtonComponent {
     @Output() randomize = new EventEmitter();

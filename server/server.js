@@ -170,7 +170,6 @@ var start = (projectBasePath, variationsBasePath, options) => {
    * GET Component Meta data
    */
   app.get('/components/*', (req, res) => {
-    console.log('GETTING METADATA');
     var relativeComponentPath = getRelativeCompPathFromComponents(req);
     // Get the path of the component from the base path and the passed in parameter
     var componentPath = path.join(projectBasePath, relativeComponentPath);
@@ -198,10 +197,9 @@ var start = (projectBasePath, variationsBasePath, options) => {
   });
 
   /**
-   * POST component Metadata
+   * POST Variation
    */
   app.post('/components/*', jsonBodyParser, (req, res) => {
-    console.log('POSTING METADATA', jsonBodyParser);
     var relativeComponentPath = getRelativeCompPathFromComponents(req);
     var componentPath = path.join(projectBasePath, relativeComponentPath);
     if (fileExists(componentPath) === false) {

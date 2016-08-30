@@ -10,7 +10,7 @@ export class ComponentMetadataResolver {
 
     constructor(
         public http: Http,
-        @Inject(fakerDataGenerator) public fakersevice: fakerDataGenerator
+        public fakersevice: fakerDataGenerator
     ) { }
 
     getMetadata(type) {

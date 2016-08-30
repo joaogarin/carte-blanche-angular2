@@ -28,7 +28,7 @@ import { customMetadataFormComponent } from './../customMetadataForm/customMetad
         <h2 class="title">
             {{componentName}} <cb-edit-button [size]="24" (click)="toggleModal()"></cb-edit-button>
         </h2>
-        <cb-playlist [component]="component"></cb-playlist>
+        <cb-playlist [componentPath]="componentPath" [component]="component"></cb-playlist>
         <cb-modal [visible]="showModal" (onClose)="toggleModal()">
             <cb-customm-metadata-form [componentPath]="componentPath" [component]="component"></cb-customm-metadata-form>
         </cb-modal>

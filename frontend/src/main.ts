@@ -15,7 +15,7 @@ import {HTTP_PROVIDERS} from '@angular/http';
  */
 import {AppComponent} from './app/app.ts';
 
-import {ComponentGenerator, ComponentMetadataResolver} from './app/services/index.ts';
+import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator } from './app/services/index.ts';
 
 @NgModule({
   declarations: [AppComponent], // directives, components, and pipes owned by this NgModule
@@ -25,6 +25,7 @@ import {ComponentGenerator, ComponentMetadataResolver} from './app/services/inde
     ...COMPILER_PROVIDERS,
     provide(LocationStrategy, { useClass: HashLocationStrategy }),
     ComponentGenerator,
+    fakerDataGenerator,
     ComponentMetadataResolver,
   ], // additional providers
   bootstrap: [AppComponent],

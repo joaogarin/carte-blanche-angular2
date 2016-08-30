@@ -73,6 +73,8 @@ export class customMetadataFormComponent implements OnInit {
         Object.keys(inputControls).forEach((key) => {
             metaObject.props[key] = inputControls[key].value;
         });
+        
+        //TODO - Organize this
         this.metaDataResolver.saveCustomMetaData('localhost', '7000', this.componentPath, metaObject);
     }
 }

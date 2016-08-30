@@ -25,6 +25,7 @@ import { RandomizeButtonComponent } from './../common/index.ts';
 })
 export class DynamicOutlet implements OnInit {
   @Input() component: any;
+  @Input() componentPath: string;
   cmpRef: ComponentRef<any>;
 
   constructor(
@@ -34,6 +35,7 @@ export class DynamicOutlet implements OnInit {
   }
 
   ngOnInit() {
+    this.getMetadataInfo();
     this.renderComponent();
   }
 
@@ -74,8 +76,7 @@ export class DynamicOutlet implements OnInit {
    * Change the input values by calling the component metadata resolver service
    */
   randomize() {
-    // Render the component again
-    this.populateInputData();
+    // Render the component again  
   }
 
   /**
@@ -84,7 +85,26 @@ export class DynamicOutlet implements OnInit {
   populateInputData() {
     this.component.inputs.forEach(input => {
       // This has to be dynamic for every input
-      this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.name);
+      this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.type.name);
+    });
+  }
+
+  /**
+   * Get the component metadata info from the ComponentMetadataResolver service
+   */
+  getMetadataInfo() {
+    //TODO - Organize this
+    this.metaDataResolver.getCustomMetadata('localhost', '7000', this.componentPath, (customMetadata) => {
+      if (customMetadata) {
+        let inputs = customMetadata.metadata.props;
+        Object.keys(inputs).forEach(key => {
+          // This has to be dynamic for every input
+          this.cmpRef.instance[key] = this.metaDataResolver.getMetadata(inputs[key]);
+        });
+      }
+      else {
+        this.populateInputData();
+      }
     });
   }
 }

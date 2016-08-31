@@ -1,7 +1,7 @@
 /**
  * Import angular core dependencies
  */
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl } from '@angular/forms';
 
 import { controlTypes } from './controlTypes.ts';
@@ -32,6 +32,7 @@ import { ComponentMetadataResolver } from './../../services/index.ts';
 export class customMetadataFormComponent implements OnInit {
     @Input() component: any;
     @Input() componentPath: string;
+    @Output() changed = new EventEmitter();
 
     controls: string[];
     inputs: Object[] = [];
@@ -75,6 +76,8 @@ export class customMetadataFormComponent implements OnInit {
         });
         
         //TODO - Organize this
-        this.metaDataResolver.saveCustomMetaData('localhost', '7000', this.componentPath, metaObject);
+        this.metaDataResolver.saveCustomMetaData('localhost', '7000', this.componentPath, metaObject, (response) => {
+            this.changed.emit('changed');
+        });
     }
 }

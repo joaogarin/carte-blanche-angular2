@@ -20,7 +20,7 @@ export class ComponentMetadataResolver {
     /**
      * Save the component custom metadata
      */
-    saveCustomMetaData(host, port, componentPath, data) {
+    saveCustomMetaData(host, port, componentPath, data, cb) {
         let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
         let post_options = new RequestOptions({ headers: headers });
         let body = JSON.stringify({
@@ -33,7 +33,7 @@ export class ComponentMetadataResolver {
             post_options)
             .subscribe(
             response => {
-                console.log(response);
+                cb(response);
             },
             err => console.error(err),
             () => console.log('')

@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, Input} from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
 
@@ -21,14 +21,18 @@ import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
     }
   `],
     template: `<div class="wrapper">
-        <cb-dynamic-outlet [componentPath]="componentPath" [component]="component"></cb-dynamic-outlet>
+        <cb-dynamic-outlet [update]="update" [componentPath]="componentPath" [component]="component"></cb-dynamic-outlet>
     </div>`,
 })
-export class Playlist {
+export class Playlist implements OnChanges {
     @Input() component: any;
     @Input() componentPath: string;
+    @Input() update: Object;
 
-    constructor() {
+    constructor() {}
 
+    ngOnChanges() {
+        console.log('I have changed');
+        this.update = Object.assign({}, this.update);
     }
 }

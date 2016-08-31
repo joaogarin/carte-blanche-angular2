@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, NgZone } from '@angular/core';
 
 import { Playlist } from './../playlist/playlist.component.ts';
 import { CreateVariationButtonComponent, ModalComponent, EditButtonComponent } from './../common/index.ts';
@@ -28,9 +28,9 @@ import { customMetadataFormComponent } from './../customMetadataForm/customMetad
         <h2 class="title">
             {{componentName}} <cb-edit-button [size]="24" (click)="toggleModal()"></cb-edit-button>
         </h2>
-        <cb-playlist [componentPath]="componentPath" [component]="component"></cb-playlist>
+        <cb-playlist [update]="updatePlayGround" [componentPath]="componentPath" [component]="component"></cb-playlist>
         <cb-modal [visible]="showModal" (onClose)="toggleModal()">
-            <cb-customm-metadata-form [componentPath]="componentPath" [component]="component"></cb-customm-metadata-form>
+            <cb-customm-metadata-form (changed)="componentPropsChange()" [componentPath]="componentPath" [component]="component"></cb-customm-metadata-form>
         </cb-modal>
     </div>`,
 })
@@ -41,8 +41,9 @@ export class PlaylistList {
 
     component: any;
     showModal: boolean = false;
+    updatePlayGround: Object;
 
-    constructor() { }
+    constructor(private zone: NgZone) { }
 
     ngOnInit() {
         // Read the @component decorator from the original component, get only the first to pass it down
@@ -51,5 +52,13 @@ export class PlaylistList {
 
     toggleModal() {
         this.showModal = !this.showModal;
+    }
+
+    componentPropsChange() {
+        this.zone.run(() => {
+            console.log('changed component properties');
+            this.showModal = false;
+            this.updatePlayGround = Object.assign({}, this.updatePlayGround);
+        });
     }
 }

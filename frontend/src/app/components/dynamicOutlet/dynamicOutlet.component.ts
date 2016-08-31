@@ -26,7 +26,7 @@ import { RandomizeButtonComponent } from './../common/index.ts';
 export class DynamicOutlet implements OnInit, OnChanges {
   @Input() component: any;
   @Input() componentPath: string;
-  @Input() update: Object;
+  @Input() inputsCustomMeta: Object;
 
   cmpRef: ComponentRef<any>;
   @ViewChild('dynamic-cmp', { read: ViewContainerRef }) dynamicCmp;
@@ -103,18 +103,14 @@ export class DynamicOutlet implements OnInit, OnChanges {
    * Get the component metadata info from the ComponentMetadataResolver service
    */
   getMetadataInfo() {
-    //TODO - Organize this
-    this.metaDataResolver.getCustomMetadata('localhost', '7000', this.componentPath, (customMetadata) => {
-      if (customMetadata) {
-        let inputs = customMetadata.metadata.props;
-        Object.keys(inputs).forEach(key => {
-          // This has to be dynamic for every input
-          this.cmpRef.instance[key] = this.metaDataResolver.getMetadata(inputs[key]);
-        });
-      }
-      else {
-        this.populateInputData();
-      }
-    });
+    if (this.inputsCustomMeta) {
+      Object.keys(this.inputsCustomMeta).forEach(key => {
+        // This has to be dynamic for every input
+        this.cmpRef.instance[key] = this.metaDataResolver.getMetadata(this.inputsCustomMeta[key]);
+      });
+    }
+    else {
+      this.populateInputData();
+    }
   }
 }

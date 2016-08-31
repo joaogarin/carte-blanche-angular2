@@ -9,6 +9,7 @@ export default function playground(frontendData, pluginData, Component, componen
     // Get Info from the component
     let componentName = pluginData.AngularSourceParsed.elements[0].componentInfo.name;
     let componentSource = pluginData.source;
+    console.log(pluginData);
 
     // Bootstrap the angular app
     main();

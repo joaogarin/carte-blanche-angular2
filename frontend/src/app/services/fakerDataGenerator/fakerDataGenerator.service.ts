@@ -11,6 +11,8 @@ export class fakerDataGenerator {
      */
     getFakerData(type) {
         switch (type) {
+            case 'string':
+                return faker.lorem.sentence();
             case 'sentence':
                 return faker.lorem.sentence();
             case 'image':

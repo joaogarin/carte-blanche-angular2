@@ -18,7 +18,7 @@ import { ComponentMetadataResolver } from './../../services/index.ts';
        <form [formGroup]="inputPropertiesForm" (ngSubmit)="onSubmit()">
            <div *ngFor="let input of inputs; let i = index" formGroupName="inputs">
                 <label>{{input.name}}</label>
-                <select formControlName="{{input.name}}">
+                <select [(ngModel)]="inputsCustomMetaCopy[input.name]" formControlName="{{input.name}}">
                     <option *ngFor="let type of controls" [ngValue]="type">{{type}}</option>
                 </select>
             </div>
@@ -32,11 +32,13 @@ import { ComponentMetadataResolver } from './../../services/index.ts';
 export class customMetadataFormComponent implements OnInit {
     @Input() component: any;
     @Input() componentPath: string;
+    @Input() inputsCustomMeta: Object;
     @Output() changed = new EventEmitter();
 
     controls: string[];
     inputs: Object[] = [];
     buttonClass: string;
+    inputsCustomMetaCopy: Object;
 
     inputsGroup = new FormGroup({});
     inputPropertiesForm = new FormGroup({
@@ -52,6 +54,11 @@ export class customMetadataFormComponent implements OnInit {
         this.generateInputTypeControls();
     }
 
+    ngOnChanges() {
+        //Clear controls and populate again
+        this.inputsCustomMetaCopy = Object.assign({}, this.inputsCustomMeta);
+    }
+
     /**
      * Generate a selector for the appropriate control for each input type. start by
      * reading the input type (string, number, float etc) and from there generate the 
@@ -60,7 +67,13 @@ export class customMetadataFormComponent implements OnInit {
      */
     generateInputTypeControls() {
         this.component.inputs.forEach(input => {
-            this.inputsGroup.addControl(input.name, new FormControl(input.type.name));
+            if (Object.keys(this.inputsCustomMeta).length > 0) {
+                this.inputsGroup.addControl(input.name, new FormControl(this.inputsCustomMetaCopy[input.name]));
+            }
+            else {
+                this.inputsCustomMetaCopy[input.name] = input.type.name;
+                this.inputsGroup.addControl(input.name, new FormControl(input.type.name));
+            }
             this.inputs = [...this.inputs, input];
         });
     }
@@ -74,7 +87,7 @@ export class customMetadataFormComponent implements OnInit {
         Object.keys(inputControls).forEach((key) => {
             metaObject.props[key] = inputControls[key].value;
         });
-        
+
         //TODO - Organize this
         this.metaDataResolver.saveCustomMetaData('localhost', '7000', this.componentPath, metaObject, (response) => {
             this.changed.emit('changed');

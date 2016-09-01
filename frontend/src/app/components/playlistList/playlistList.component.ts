@@ -31,7 +31,7 @@ import { ComponentGenerator, ComponentMetadataResolver } from './../../services/
         </h2>
         <cb-playlist [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-playlist>
         <cb-modal [visible]="showModal" (onClose)="toggleModal()">
-            <cb-customm-metadata-form (changed)="componentPropsChange()" [componentPath]="componentPath" [component]="component"></cb-customm-metadata-form>
+            <cb-customm-metadata-form (changed)="componentPropsChange()" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-customm-metadata-form>
         </cb-modal>
     </div>`,
 })
@@ -39,6 +39,7 @@ export class PlaylistList {
     @Input() componentObj: any;
     @Input() componentName: string;
     @Input() componentPath: string;
+    @Input() frontendOptions: any;
 
     component: any;
     inputsCustomMeta: Object = {};

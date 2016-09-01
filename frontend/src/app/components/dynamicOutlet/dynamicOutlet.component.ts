@@ -37,14 +37,14 @@ export class DynamicOutlet implements OnInit, OnChanges {
     private vcRef: ViewContainerRef) {
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges() {
     this.getInfoAndRender();
   }
 
   getInfoAndRender() {
-    this.getMetadataInfo();
+    //this.getMetadataInfo();
     this.renderComponent();
   }
 
@@ -103,7 +103,7 @@ export class DynamicOutlet implements OnInit, OnChanges {
    * Get the component metadata info from the ComponentMetadataResolver service
    */
   getMetadataInfo() {
-    if (this.inputsCustomMeta) {
+    if (Object.keys(this.inputsCustomMeta).length > 0) {
       Object.keys(this.inputsCustomMeta).forEach(key => {
         // This has to be dynamic for every input
         this.cmpRef.instance[key] = this.metaDataResolver.getMetadata(this.inputsCustomMeta[key]);

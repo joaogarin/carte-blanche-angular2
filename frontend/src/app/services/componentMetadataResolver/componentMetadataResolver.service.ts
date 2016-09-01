@@ -49,7 +49,7 @@ export class ComponentMetadataResolver {
                 if (response.status == 200) {
                     let data = JSON.parse(response['_body']);
                     const customMetadata: any = codeToCustomMetadata(data.data);
-                    if (customMetadata.err) {
+                    if (customMetadata.err || typeof customMetadata.metadata == 'undefined') {
                         cb(false);
                     }
                     else {

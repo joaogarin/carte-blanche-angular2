@@ -15,7 +15,7 @@ import { PlaylistList } from './components/playlistList/playlistList.component.t
     directives: [PlaylistList],
     // The template for our app
     template: `
-    <cb-playlist-list [componentPath]="componentPath" [componentName]="componentName" [componentObj]="componentObj"></cb-playlist-list>
+    <cb-playlist-list [frontendOptions]="frontendOptions" [componentPath]="componentPath" [componentName]="componentName" [componentObj]="componentObj"></cb-playlist-list>
     `
 })
 export class AppComponent implements OnInit {
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
     componentPath: string;
     componentSource: string;
     compiledComponent: any;
+    frontendOptions: any;
     basePath: string;
     componentObj: Object;
 
@@ -32,6 +33,9 @@ export class AppComponent implements OnInit {
         this.componentName = nativeElement.getAttributeNode("data-component").value;
         this.componentPath = nativeElement.getAttributeNode("data-component-path").value;
         this.componentSource = nativeElement.getAttributeNode("data-component-source").value;
+
+        // DO JSON PARSE
+        this.frontendOptions = nativeElement.getAttributeNode("data-frontend-options").value;
 
         this.componentObj = JSON.parse(this.componentSource);
     }

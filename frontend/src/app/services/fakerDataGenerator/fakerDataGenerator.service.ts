@@ -3,7 +3,7 @@ import * as faker from 'faker';
 
 @Injectable()
 export class fakerDataGenerator {
-    
+
     /**
      * Use faker to generate metadata for the inputs
      * @param {type} 
@@ -25,6 +25,8 @@ export class fakerDataGenerator {
                 return faker.lorem.words();
             case 'phone':
                 return faker.phone.phoneNumber();
+            case 'name':
+                return faker.name.findName();
             default:
                 return null;
         }

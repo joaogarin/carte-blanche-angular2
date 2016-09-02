@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import * as faker from 'faker';
 
-import { customMetadataToCode, codeToCustomMetadata } from './../../utils/index.ts';
+import { customMetadataToCode, codeToCustomMetadata, propsToVariation, addDataToVariation } from './../../utils/index.ts';
 import { fakerDataGenerator } from './../index.ts';
 
 @Injectable()
@@ -66,4 +66,76 @@ export class ComponentMetadataResolver {
             () => { }
         );;
     }
+
+    /**
+     * Save a component variation
+     * 
+     * @param {string} host 
+     * The host where the server is set
+     * 
+     * @param {string} port
+     * the port where the server is running
+     * 
+     * @param {string} slug
+     * the slug for the variation
+     * 
+     * @param {Object} props
+     * The custom metadata inputs for the component
+     * 
+     * @param {string} componentPath
+     * The component path
+     * 
+     * @param {function} cb
+     * Callback to run after the http request was sent
+     */
+    saveVariation(host, port, name, slug, props, componentPath, cb) {
+        let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
+        let post_options = new RequestOptions({ headers: headers });
+
+        const data = this.getVariationStringFromProps({
+            props: this.getRandomValues(props),
+            name,
+        });
+        let body = JSON.stringify({
+            variation: `${slug}`,
+            code: data,
+        });
+
+        this.http.post(
+            `http://${host}:${port}/variations/${componentPath}`,
+            body,
+            post_options)
+            .subscribe(
+            response => {
+                cb(response);
+            },
+            err => console.error(err),
+            () => console.log('')
+            );
+    }
+
+    getRandomValues(props) {
+        //Call faker
+        Object.keys(props).forEach(key => {
+            // This has to be dynamic for every input
+            props[key] = this.getMetadata(props[key]);
+        });
+
+        return props;
+    }
+
+    /**
+     * Get the variation string from the props received
+     */
+    getVariationStringFromProps(data) {
+        const {
+            props,
+            name,
+        } = data;
+        // Generate a human-readable JSON string from the props
+        const propsString = propsToVariation(props);
+        // Add the name to the data we save
+        return addDataToVariation(propsString, { name });
+    };
+
 }

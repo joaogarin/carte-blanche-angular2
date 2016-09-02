@@ -1,20 +1,23 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, Output} from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 import { CardComponent } from './../card/card.component.ts';
+import { createVariationFormComponent } from './createVariationForm.component.ts';
 
 /*
  * Dynamic outlet to generate components
  */
 @Component({
-    selector: 'cb-create-variation-button',
-    directives: [CardComponent],
-    styles: [`
+  selector: 'cb-create-variation-button',
+  directives: [CardComponent, createVariationFormComponent, NgClass],
+  styles: [`
     .card {
         width: 90%;
         cursor: pointer;
+        margin: auto;
         }
 
         .card:hover line {
@@ -62,8 +65,10 @@ import { CardComponent } from './../card/card.component.ts';
         display: none;
         }
     `],
-    template: `<cb-card>
-        <div class="svgWrapper">
+  template: `<div class="card">
+    <cb-card>
+        <cb-create-variation-form (onCreateVariation)="SubmitForm($event)" [hidden]="formDisabled"></cb-create-variation-form>
+        <div class="svgWrapper" [ngClass]="{hidden: !formDisabled}" (click)="toggleFormHidden()">
             <svg
             class="svg"
             version="1.1"
@@ -92,9 +97,30 @@ import { CardComponent } from './../card/card.component.ts';
             </g>
           </svg>
           </div>
-        </cb-card>`,
+        </cb-card>
+      </div>`,
 })
 export class CreateVariationButtonComponent {
-    constructor() {
-    }
+  formDisabled: boolean = true;
+  @Output() onCreateVariation = new EventEmitter();
+
+  constructor() {
+  }
+
+  /**
+   * Disable or enable the form when clicking the create variation button icon
+   */
+  toggleFormHidden() {
+    this.formDisabled = !this.formDisabled;
+  }
+
+  /**
+   * Event callback for the form submission to create a variation
+   * 
+   * @params {string} event
+   * The name of the variation to be created
+   */
+  SubmitForm(variation) {
+    this.onCreateVariation.emit(variation);
+  }
 }

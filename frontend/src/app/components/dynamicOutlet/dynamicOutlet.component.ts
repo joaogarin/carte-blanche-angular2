@@ -92,16 +92,6 @@ export class DynamicOutlet implements OnInit, OnChanges {
   }
 
   /**
-   * Go through the component's inputs and generate data using our metaDataResolver service
-   */
-  populateInputData() {
-    this.component.inputs.forEach(input => {
-      // This has to be dynamic for every input
-      this.cmpRef.instance[input.name] = this.metaDataResolver.getMetadata(input.type.name);
-    });
-  }
-
-  /**
    * Get the component metadata info from the ComponentMetadataResolver service
    */
   getMetadataInfo() {
@@ -110,9 +100,6 @@ export class DynamicOutlet implements OnInit, OnChanges {
         // This has to be dynamic for every input
         this.cmpRef.instance[key] = this.metaDataResolver.getMetadata(this.inputsCustomMeta[key]);
       });
-    }
-    else {
-      this.populateInputData();
     }
   }
 }

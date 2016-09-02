@@ -29,10 +29,11 @@ import { ComponentGenerator, ComponentMetadataResolver } from './../../services/
         <h2 class="title">
             {{componentName}} <cb-edit-button [size]="24" (click)="toggleModal()"></cb-edit-button>
         </h2>
-        <cb-playlist *ngIf="loadedCustomData" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-playlist>
         <cb-modal [visible]="showModal" (onClose)="toggleModal()">
             <cb-customm-metadata-form (changed)="componentPropsChange()" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-customm-metadata-form>
         </cb-modal>
+        <cb-playlist *ngIf="loadedCustomData" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-playlist>
+        <cb-create-variation-button (onCreateVariation)="submitVariation($event)"></cb-create-variation-button>
     </div>`,
 })
 export class PlaylistList {
@@ -71,7 +72,33 @@ export class PlaylistList {
             if (customMetadata) {
                 this.inputsCustomMeta = customMetadata.metadata.props;
             }
+            else {
+                this.getDefaultMetaInfo();
+            }
             this.loadedCustomData = true;
+        });
+    }
+
+    /**
+     * get the default component metadata from the inputs
+     */
+    getDefaultMetaInfo() {
+        this.component.inputs.forEach(input => {
+            // This has to be dynamic for every input
+            this.inputsCustomMeta[input.name] = input.type.name;
+        });
+    }
+
+    /**
+     * Event called by the creat variation component
+     * 
+     * @params {string} name
+     * The name of the variation to be created
+     */
+    submitVariation(variation) {
+        console.log('Create variation', variation);
+        this.metaDataResolver.saveVariation('localhost', '7000', variation.name, variation.name, this.inputsCustomMeta, this.componentPath, () => {
+            
         });
     }
 }

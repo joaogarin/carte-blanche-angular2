@@ -37,7 +37,9 @@ export class DynamicOutlet implements OnInit, OnChanges {
     private vcRef: ViewContainerRef) {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getInfoAndRender();
+  }
 
   ngOnChanges() {
     this.getInfoAndRender();

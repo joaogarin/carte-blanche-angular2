@@ -29,7 +29,7 @@ import { ComponentGenerator, ComponentMetadataResolver } from './../../services/
         <h2 class="title">
             {{componentName}} <cb-edit-button [size]="24" (click)="toggleModal()"></cb-edit-button>
         </h2>
-        <cb-playlist [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-playlist>
+        <cb-playlist *ngIf="loadedCustomData" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-playlist>
         <cb-modal [visible]="showModal" (onClose)="toggleModal()">
             <cb-customm-metadata-form (changed)="componentPropsChange()" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-customm-metadata-form>
         </cb-modal>
@@ -44,6 +44,7 @@ export class PlaylistList {
     component: any;
     inputsCustomMeta: Object = {};
     showModal: boolean = false;
+    loadedCustomData: boolean = false;
 
     constructor(private metaDataResolver: ComponentMetadataResolver) { }
 
@@ -70,6 +71,7 @@ export class PlaylistList {
             if (customMetadata) {
                 this.inputsCustomMeta = customMetadata.metadata.props;
             }
+            this.loadedCustomData = true;
         });
     }
 }

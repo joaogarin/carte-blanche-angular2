@@ -32,6 +32,6 @@ export class Playlist implements OnChanges {
     constructor() {}
 
     ngOnChanges() {
-        console.log('I have changed');
+        
     }
 }

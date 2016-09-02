@@ -79,7 +79,6 @@ export class customMetadataFormComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log('Submit form', this.inputPropertiesForm);
         let inputControls = this.inputPropertiesForm.controls['inputs']['controls'];
         let metaObject: any = {
             props: {}

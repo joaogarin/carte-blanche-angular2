@@ -7,10 +7,8 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { COMPILER_PROVIDERS } from '@angular/compiler';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
-import { NgClass } from '@angular/common';
 
 /*
  * App Component
@@ -26,15 +24,17 @@ import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator } fro
 /**
  * import components
  */
-import { ButtonComponent, CardComponent, CreateVariationButtonComponent, EditButtonComponent, ModalComponent } from './app/components/common/index.ts';
+import { ButtonComponent, CardComponent, CreateVariationButtonComponent, createVariationFormComponent, EditButtonComponent, ModalComponent } from './app/components/common/index.ts';
 import { customMetadataFormComponent } from './app/components/customMetadataForm/customMetadataForm.component.ts';
 import { Playlist } from './app/components/playlist/playlist.component.ts';
 import { PlaylistList } from './app/components/playlistList/playlistList.component.ts';
+import { DynamicOutlet } from './app/components/dynamicOutlet/dynamicOutlet.component.ts';
 
 @NgModule({
-  declarations: [AppComponent, NgClass, ButtonComponent, CardComponent, CreateVariationButtonComponent, EditButtonComponent, ModalComponent, customMetadataFormComponent, Playlist, PlaylistList], // directives, components, and pipes owned by this NgModule
-  imports: [BrowserModule, FormsModule, HttpModule],
+  declarations: [AppComponent, ButtonComponent, CardComponent, CreateVariationButtonComponent, createVariationFormComponent, EditButtonComponent, ModalComponent, customMetadataFormComponent, Playlist, PlaylistList, DynamicOutlet], // directives, components, and pipes owned by this NgModule
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule],
   providers: [
+    ...COMPILER_PROVIDERS,
     ComponentGenerator,
     fakerDataGenerator,
     ComponentMetadataResolver,

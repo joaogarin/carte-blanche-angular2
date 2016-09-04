@@ -21,13 +21,13 @@ import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
     }
   `],
     template: `<div class="wrapper">
-        <cb-dynamic-outlet [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-dynamic-outlet>
+        <cb-dynamic-outlet [componentPath]="componentPath" [component]="component" [variationData]="variationData"></cb-dynamic-outlet>
     </div>`,
 })
 export class Playlist implements OnChanges {
     @Input() component: any;
     @Input() componentPath: string;
-    @Input() inputsCustomMeta: Object;
+    @Input() variationData: Object;
 
     constructor() {}
 

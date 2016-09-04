@@ -4,7 +4,7 @@
 import { Component, Input, OnInit, ReflectiveInjector, ViewContainerRef, ViewChild, ComponentRef, OnChanges } from '@angular/core';
 
 import { ComponentGenerator, ComponentMetadataResolver } from './../../services/index.ts';
-import { RandomizeButtonComponent } from './../common/index.ts';
+import { VariationData } from './../../utils/index.ts';
 
 /*
  * Dynamic outlet to generate components
@@ -17,16 +17,12 @@ import { RandomizeButtonComponent } from './../common/index.ts';
     margin-top: 20px;
   }
   `],
-  directives: [RandomizeButtonComponent],
-  template: `<div id="dynamic-cmp" class="dynamic-comp"></div>
-  <div class="button-wrapper">
-    <cb-randomize-button (randomize)="randomize()">Randomize</cb-randomize-button>
-  </div>`,
+  template: `<div id="dynamic-cmp" class="dynamic-comp"></div>`,
 })
 export class DynamicOutlet implements OnInit, OnChanges {
   @Input() component: any;
   @Input() componentPath: string;
-  @Input() inputsCustomMeta: Object;
+  @Input() variationData: VariationData;
 
   cmpRef: ComponentRef<any>;
   @ViewChild('dynamic-cmp', { read: ViewContainerRef }) dynamicCmp;
@@ -95,10 +91,10 @@ export class DynamicOutlet implements OnInit, OnChanges {
    * Get the component metadata info from the ComponentMetadataResolver service
    */
   getMetadataInfo() {
-    if (Object.keys(this.inputsCustomMeta).length > 0) {
-      Object.keys(this.inputsCustomMeta).forEach(key => {
+    if (Object.keys(this.variationData).length > 0) {
+      Object.keys(this.variationData.props).forEach(key => {
         // This has to be dynamic for every input
-        this.cmpRef.instance[key] = this.metaDataResolver.getMetadata(this.inputsCustomMeta[key]);
+        this.cmpRef.instance[key] = this.variationData.props[key];
       });
     }
   }

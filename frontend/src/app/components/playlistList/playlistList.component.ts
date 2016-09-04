@@ -32,7 +32,9 @@ import { ComponentGenerator, ComponentMetadataResolver } from './../../services/
         <cb-modal [visible]="showModal" (onClose)="toggleModal()">
             <cb-customm-metadata-form (changed)="componentPropsChange()" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-customm-metadata-form>
         </cb-modal>
-        <cb-playlist *ngIf="loadedCustomData" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-playlist>
+        <div *ngFor="let variation of variations; let i = index">
+            <cb-playlist *ngIf="loadedCustomData" [componentPath]="componentPath" [component]="component" [variationData]="variation"></cb-playlist>
+        </div>
         <cb-create-variation-button (onCreateVariation)="submitVariation($event)"></cb-create-variation-button>
     </div>`,
 })
@@ -46,6 +48,7 @@ export class PlaylistList {
     inputsCustomMeta: Object = {};
     showModal: boolean = false;
     loadedCustomData: boolean = false;
+    variations: Object[] = [];
 
     constructor(private metaDataResolver: ComponentMetadataResolver) { }
 
@@ -53,6 +56,7 @@ export class PlaylistList {
         // Read the @component decorator from the original component, get only the first to pass it down
         this.component = this.componentObj.elements[0];
         this.getMetadataInfo();
+        this.getVariations();
     }
 
     toggleModal() {
@@ -65,8 +69,8 @@ export class PlaylistList {
     }
 
     /**
-   * Get the component metadata info from the ComponentMetadataResolver service
-   */
+     * Get the component metadata info from the ComponentMetadataResolver service
+     */
     getMetadataInfo() {
         this.metaDataResolver.getCustomMetadata('localhost', '7000', this.componentPath, (customMetadata) => {
             if (customMetadata) {
@@ -90,15 +94,28 @@ export class PlaylistList {
     }
 
     /**
+     * Get all variations of the current component
+     */
+    getVariations() {
+        this.metaDataResolver.getVariations('localhost', '7000', this.componentPath, (response) => {
+            if (response) {
+                Object.keys(response).forEach((index) => {
+                    this.variations = [...this.variations, response[index]];
+                });
+            }
+        });
+    }
+
+    /**
      * Event called by the creat variation component
      * 
      * @params {string} name
      * The name of the variation to be created
      */
     submitVariation(variation) {
-        console.log('Create variation', variation);
-        this.metaDataResolver.saveVariation('localhost', '7000', variation.name, variation.name, this.inputsCustomMeta, this.componentPath, () => {
-            
+        this.metaDataResolver.saveVariation('localhost', '7000', variation.name, variation.name, this.inputsCustomMeta, this.componentPath, (response) => {
+            console.log('Saved variation', response);
+            this.getVariations();
         });
     }
 }

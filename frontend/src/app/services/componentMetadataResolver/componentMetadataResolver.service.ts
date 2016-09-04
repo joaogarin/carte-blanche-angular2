@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import * as faker from 'faker';
 
-import { customMetadataToCode, codeToCustomMetadata, propsToVariation, addDataToVariation } from './../../utils/index.ts';
+import { customMetadataToCode, codeToCustomMetadata, propsToVariation, addDataToVariation, variationsToProps } from './../../utils/index.ts';
 import { fakerDataGenerator } from './../index.ts';
 
 @Injectable()
@@ -64,7 +64,7 @@ export class ComponentMetadataResolver {
                 console.log(err)
             },
             () => { }
-        );;
+        );
     }
 
     /**
@@ -112,6 +112,41 @@ export class ComponentMetadataResolver {
             err => console.error(err),
             () => console.log('')
             );
+    }
+
+    /**
+     * Get all variations of a given component
+     * 
+     * @param {string} host 
+     * The host where the server is set
+     * 
+     * @param {string} port
+     * the port where the server is running
+     * 
+     * @param {string} componentPath
+     * The component path
+     * 
+     * @param {function} cb
+     * Callback to run after the http request was sent
+     * 
+     */
+    getVariations(host, port, componentPath, cb) {
+        this.http.get(`http://${host}:${port}/variations/${componentPath}`).subscribe(
+            (response: any) => {
+                if (response.status == 200) {
+                    const json = JSON.parse(response['_body']).data;
+                    const variationPropsList = variationsToProps(json);
+                    cb(variationPropsList);
+                }
+                else {
+                    cb(false);
+                }
+            },
+            (err) => {
+                console.log(err);
+            },
+            () => { }
+        );
     }
 
     getRandomValues(props) {

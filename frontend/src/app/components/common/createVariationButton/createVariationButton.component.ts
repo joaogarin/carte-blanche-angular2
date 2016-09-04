@@ -12,7 +12,6 @@ import { createVariationFormComponent } from './createVariationForm.component.ts
  */
 @Component({
   selector: 'cb-create-variation-button',
-  directives: [CardComponent, createVariationFormComponent, NgClass],
   styles: [`
     .card {
         width: 90%;

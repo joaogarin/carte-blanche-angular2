@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, Input, OnInit, ElementRef, DynamicComponentLoader, Injector } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, Injector } from '@angular/core';
 
 import { PlaylistList } from './components/playlistList/playlistList.component.ts';
 
@@ -12,7 +12,6 @@ import { PlaylistList } from './components/playlistList/playlistList.component.t
 @Component({
     // The selector is what angular internally uses
     selector: '.cb-angular', // <app></app>
-    directives: [PlaylistList],
     // The template for our app
     template: `
     <cb-playlist-list [frontendOptions]="frontendOptions" [componentPath]="componentPath" [componentName]="componentName" [componentObj]="componentObj"></cb-playlist-list>

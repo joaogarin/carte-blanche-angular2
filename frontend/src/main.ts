@@ -1,13 +1,16 @@
 /*
  * Providers provided by Angular
  */
-import {provide, enableProdMode} from '@angular/core';
-import {NgModule} from '@angular/core';
+import { enableProdMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { COMPILER_PROVIDERS } from '@angular/compiler';
-import {HTTP_PROVIDERS} from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+import { NgClass } from '@angular/common';
 
 /*
  * App Component
@@ -18,12 +21,9 @@ import {AppComponent} from './app/app.ts';
 import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator } from './app/services/index.ts';
 
 @NgModule({
-  declarations: [AppComponent], // directives, components, and pipes owned by this NgModule
-  imports: [BrowserModule],
+  declarations: [AppComponent, NgClass], // directives, components, and pipes owned by this NgModule
+  imports: [BrowserModule, FormsModule, HttpModule],
   providers: [
-    ...HTTP_PROVIDERS,
-    ...COMPILER_PROVIDERS,
-    provide(LocationStrategy, { useClass: HashLocationStrategy }),
     ComponentGenerator,
     fakerDataGenerator,
     ComponentMetadataResolver,

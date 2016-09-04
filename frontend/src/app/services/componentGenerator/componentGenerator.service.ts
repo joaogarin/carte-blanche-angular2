@@ -1,5 +1,5 @@
-import {Injectable, Component, Input, ComponentResolver, ComponentMetadata, ComponentFactory} from '@angular/core';
-import {RuntimeCompiler} from "@angular/compiler";
+import { Injectable, Component, Input, ComponentMetadata, ComponentFactory } from '@angular/core';
+import { RuntimeCompiler } from "@angular/compiler";
 import { MyAppModule } from './../../../main.ts';
 
 @Injectable()
@@ -48,6 +48,7 @@ export class ComponentGenerator {
 
         const cmpClass = class DynamicComponent { };
         const decoratedCmp = Component(metadata)(cmpClass);
+
         return this.compiler.compileComponentAsync(decoratedCmp, MyAppModule);
     }
 }

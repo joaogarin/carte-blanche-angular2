@@ -2,7 +2,7 @@
  * Import angular core dependencies
  */
 import { Component, Output, EventEmitter } from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ButtonComponent } from './../../common/index.ts';
 
@@ -41,7 +41,6 @@ input:focus {
   outline: 0;
 }
     `],
-    directives: [REACTIVE_FORM_DIRECTIVES, ButtonComponent],
     template: `
     <div>
        <form [formGroup]="createVariationForm" (ngSubmit)="onSubmit()">

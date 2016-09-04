@@ -18,10 +18,21 @@ import { NgClass } from '@angular/common';
  */
 import {AppComponent} from './app/app.ts';
 
+/**
+ * import services
+ */
 import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator } from './app/services/index.ts';
 
+/**
+ * import components
+ */
+import { ButtonComponent, CardComponent, CreateVariationButtonComponent, EditButtonComponent, ModalComponent } from './app/components/common/index.ts';
+import { customMetadataFormComponent } from './app/components/customMetadataForm/customMetadataForm.component.ts';
+import { Playlist } from './app/components/playlist/playlist.component.ts';
+import { PlaylistList } from './app/components/playlistList/playlistList.component.ts';
+
 @NgModule({
-  declarations: [AppComponent, NgClass], // directives, components, and pipes owned by this NgModule
+  declarations: [AppComponent, NgClass, ButtonComponent, CardComponent, CreateVariationButtonComponent, EditButtonComponent, ModalComponent, customMetadataFormComponent, Playlist, PlaylistList], // directives, components, and pipes owned by this NgModule
   imports: [BrowserModule, FormsModule, HttpModule],
   providers: [
     ComponentGenerator,

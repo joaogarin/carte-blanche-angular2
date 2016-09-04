@@ -2,6 +2,8 @@
 import * as React from 'react';
 import {main} from './src/main.ts';
 
+let bootstrapedComponentName: string;
+
 export default function playground(frontendData, pluginData, Component, componentPath) {
 
     // Parse the angular source from typedoc
@@ -11,9 +13,11 @@ export default function playground(frontendData, pluginData, Component, componen
     let componentSource = pluginData.source;
     let options = JSON.stringify(frontendData.options);
 
-    // Bootstrap the angular app
-    main();
-
+    // Bootstrap the angular app if we are in a different component
+    if (bootstrapedComponentName != componentName) {
+        main();
+        bootstrapedComponentName = componentName;
+    }
     /**
      * We need to pass in the component as an input to the angular app so it can 
      * render it using Dynamic component loader

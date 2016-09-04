@@ -2,7 +2,7 @@
  * Import angular core dependencies
  */
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { controlTypes } from './controlTypes.ts';
 import { ButtonComponent } from './../common/index.ts';
@@ -10,7 +10,6 @@ import { ComponentMetadataResolver } from './../../services/index.ts';
 @Component({
     selector: 'cb-customm-metadata-form',
     styles: [``],
-    directives: [REACTIVE_FORM_DIRECTIVES, ButtonComponent],
     template: `
     <div>
        <h1 class="title">Edit component properties</h1>

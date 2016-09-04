@@ -11,7 +11,6 @@ import { ComponentGenerator, ComponentMetadataResolver } from './../../services/
 @Component({
     // The selector is what angular internally uses
     selector: 'cb-playlist-list',
-    directives: [Playlist, CreateVariationButtonComponent, ModalComponent, EditButtonComponent, customMetadataFormComponent],
     styles: [`
     .wrapper {
         background-color: #f4f7f9;

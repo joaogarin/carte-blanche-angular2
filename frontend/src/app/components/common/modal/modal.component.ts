@@ -2,14 +2,12 @@
  * Angular 2 decorators and services
  */
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgClass } from '@angular/common';
 
 /*
  * Dynamic outlet to generate components
  */
 @Component({
     selector: 'cb-modal',
-    directives: [NgClass],
     styles: [`
     .modalBackground {
         width: 100%;

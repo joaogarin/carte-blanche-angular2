@@ -8,7 +8,6 @@ import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
 @Component({
     // The selector is what angular internally uses
     selector: 'cb-playlist',
-    directives: [DynamicOutlet],
     styles: [`
     .wrapper {
         display: flex;

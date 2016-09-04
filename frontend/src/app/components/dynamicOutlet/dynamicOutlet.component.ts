@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, Input, OnInit, ReflectiveInjector, ViewContainerRef, ViewChild, ComponentRef, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, ReflectiveInjector, ViewContainerRef, ViewChild, ComponentRef, OnChanges, ComponentFactoryResolver } from '@angular/core';
 
 import { ComponentGenerator, ComponentMetadataResolver } from './../../services/index.ts';
 import { VariationData } from './../../utils/index.ts';
@@ -25,7 +25,7 @@ export class DynamicOutlet implements OnInit, OnChanges {
   @Input() variationData: VariationData;
 
   cmpRef: ComponentRef<any>;
-  @ViewChild('dynamic-cmp', { read: ViewContainerRef }) dynamicCmp;
+  @ViewChild('placeholder', { read: ViewContainerRef }) viewContainerRef;
 
   constructor(
     private componentGenerator: ComponentGenerator,
@@ -57,13 +57,14 @@ export class DynamicOutlet implements OnInit, OnChanges {
     // Parse the decorator info
     let componentDecorator = this.getDecoratorObject(this.component.componentDecorators[0].arguments.obj);
     // get the ComponentFactory from our service so we can inject it into the view
-    this.componentGenerator.createComponentFactory(componentDecorator)
-      .then(factory => {
+    this.componentGenerator.createComponentFactory(componentDecorator, (factory) => {
+      if (factory) {
         this.vcRef.clear();
         const injector = ReflectiveInjector.fromResolvedProviders([], this.vcRef.parentInjector);
         this.cmpRef = this.vcRef.createComponent(factory, -1, injector, []);
         this.getMetadataInfo();
-      });
+      }
+    });
   }
 
   /**

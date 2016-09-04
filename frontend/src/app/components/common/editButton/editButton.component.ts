@@ -9,7 +9,6 @@ import { ButtonComponent } from './../index.ts';
  */
 @Component({
     selector: 'cb-edit-button',
-    directives: [ButtonComponent],
     styles: [`
     .svg polygon,
     .svg line,

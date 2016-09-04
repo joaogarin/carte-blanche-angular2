@@ -1,13 +1,14 @@
 /*
  * Providers provided by Angular
  */
-import {provide, enableProdMode} from '@angular/core';
-import {NgModule} from '@angular/core';
+import { enableProdMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { COMPILER_PROVIDERS } from '@angular/compiler';
-import {HTTP_PROVIDERS} from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 /*
  * App Component
@@ -15,15 +16,25 @@ import {HTTP_PROVIDERS} from '@angular/http';
  */
 import {AppComponent} from './app/app.ts';
 
+/**
+ * import services
+ */
 import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator } from './app/services/index.ts';
 
+/**
+ * import components
+ */
+import { ButtonComponent, CardComponent, CreateVariationButtonComponent, createVariationFormComponent, EditButtonComponent, ModalComponent } from './app/components/common/index.ts';
+import { customMetadataFormComponent } from './app/components/customMetadataForm/customMetadataForm.component.ts';
+import { Playlist } from './app/components/playlist/playlist.component.ts';
+import { PlaylistList } from './app/components/playlistList/playlistList.component.ts';
+import { DynamicOutlet } from './app/components/dynamicOutlet/dynamicOutlet.component.ts';
+
 @NgModule({
-  declarations: [AppComponent], // directives, components, and pipes owned by this NgModule
-  imports: [BrowserModule],
+  declarations: [AppComponent, ButtonComponent, CardComponent, CreateVariationButtonComponent, createVariationFormComponent, EditButtonComponent, ModalComponent, customMetadataFormComponent, Playlist, PlaylistList, DynamicOutlet], // directives, components, and pipes owned by this NgModule
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule],
   providers: [
-    ...HTTP_PROVIDERS,
     ...COMPILER_PROVIDERS,
-    provide(LocationStrategy, { useClass: HashLocationStrategy }),
     ComponentGenerator,
     fakerDataGenerator,
     ComponentMetadataResolver,

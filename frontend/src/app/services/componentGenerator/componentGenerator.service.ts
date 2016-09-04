@@ -1,5 +1,6 @@
-import {Injectable, Component, Input, ComponentResolver, ComponentMetadata, ComponentFactory} from '@angular/core';
-import {RuntimeCompiler} from "@angular/compiler";
+import { Injectable, Component, Input, ComponentMetadata, ComponentFactory, ComponentFactoryResolver, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RuntimeCompiler } from "@angular/compiler";
 import { MyAppModule } from './../../../main.ts';
 
 @Injectable()
@@ -20,34 +21,47 @@ export class ComponentGenerator {
      */
     createMetadata(componentDecorator): ComponentMetadata {
         return new ComponentMetadata({
-            selector: 'dynamic-outlet',
+            selector: 'cb-dynamic-outlet',
             styles: [componentDecorator.styles[0]],
             template: componentDecorator.template,
         });
     }
 
     /**
-     * Use the runtime compiler to create this Component Factory dynamically
+     * Use the runtime compiler to create this Component Factory dynamically as well as a dynamic module 
+     * to wrapp it
      * 
-     * This will create a dynamica component representation by calling  compiler.compileComponentAsync and passing in a NgModule
-     * that we created when bootstraping our app
+     * This will create a dynamic module and a dynamic component by calling  compiler.compileModuleAndAllComponentsAsync and passing in a NgModule
+     * that we create on the fly wrapping our newly created component
      * 
      * @param {Object} decoratorData
      * The medatata for this component we got from typedoc
      * 
-     * @returns {Promise<ComponentFactory<any>>} 
-     * Returns a promisse with the component factory created
+     * @param {Function} cb
+     * The callback to call when we create the component returning inside our component Factor
      * 
      * With this Component Factory we can then inject it in the View by using ViewContainerRef and Injector
      * See @dynamicOutlot.component.ts
      */
-    createComponentFactory(decoratorData: Object): Promise<ComponentFactory<any>> {
+    createComponentFactory(decoratorData: Object, cb: Function) {
 
         // first get our metadata
         let metadata = this.createMetadata(decoratorData);
+        let factory;
 
         const cmpClass = class DynamicComponent { };
         const decoratedCmp = Component(metadata)(cmpClass);
-        return this.compiler.compileComponentAsync(decoratedCmp, MyAppModule);
+
+        @NgModule({
+            imports: [BrowserModule],
+            declarations: [decoratedCmp]
+        })
+        class DynamicModule { }
+
+        this.compiler.compileModuleAndAllComponentsAsync(DynamicModule).then((moduleWithComponentFactory) => {
+            const compFactory = moduleWithComponentFactory.componentFactories
+                .find(x => x.componentType === decoratedCmp);
+            cb(compFactory);
+        });
     }
 }

@@ -1,17 +1,7 @@
 import {
-    iit,
-    it,
-    ddescribe,
-    describe,
-    expect,
     async,
-    inject,
-    beforeEachProviders
+    inject
 } from '@angular/core/testing';
-import {
-    TestComponentBuilder,
-    ComponentFixture
-} from '@angular/compiler/testing';
 
 describe('Frontend Index', () => {
     it('should exist', () => {

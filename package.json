@@ -1,6 +1,7 @@
 {
   "name": "carte-blanche-angular2",
   "description": "CarteBlanche plugin for Angular2",
+  "version": "0.0.0-semantic",
   "keywords": [
     "angular2",
     "carteblanche"
@@ -46,6 +47,8 @@
     "babel-preset-react": "",
     "babel-preset-stage-0": "",
     "codelyzer": "0.0.28",
+    "commitizen": "^2.8.6",
+    "cz-conventional-changelog": "^1.2.0",
     "es6-promise-loader": "^1.0.1",
     "es6-shim": "^0.35.0",
     "es7-reflect-metadata": "^1.6.0",
@@ -58,6 +61,7 @@
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
+    "semantic-release": "^4.3.5",
     "source-map-loader": "^0.1.5",
     "ts-helper": "0.0.1",
     "ts-helpers": "^1.1.1",
@@ -70,14 +74,14 @@
     "typescript": "~1.8.9",
     "typings": "^1.3.2",
     "webpack": "^1.13.1",
-    "webpack-merge": "^0.14.0",
-    "semantic-release": "^4.3.5"
+    "webpack-merge": "^0.14.0"
   },
   "peerDependencies": {
     "carte-blanche": "^0.3.1",
     "webpack": ">=1 <3"
   },
   "scripts": {
+    "commit": "git-cz",
     "clean-install": "rm -rf node_modules && rm -rf typings && npm install",
     "build-plugin": "BABEL_DISABLE_CACHE=1 BABEL_ENV=production babel --ignore=node_modules --out-dir='dist' plugin.js typedocparser.js server/server.js server/run.js server/utils/getAbsoluteVariationPath.js",
     "build-frontend": "webpack --config webpack.config.js --progress --profile --colors --display-error-details --display-cached",
@@ -93,5 +97,8 @@
   "release": {
     "debug": false,
     "branch": "master"
+  },
+  "czConfig": {
+    "path":"node_modules/cz-conventional-changelog"
   }
 }

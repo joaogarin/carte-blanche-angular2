@@ -1,3 +1,18 @@
+<a name=""></a>
+##  (2016-09-07)
+
+
+#### Bug Fixes
+
+*  (server) Added new line ([d20365ef](https://github.com/joaogarin/carte-blanche-angular2/commit/d20365ef4179c6ef3f382528c18785884f808c55))
+* **server:**  Fix sever run config ([dc46c211](https://github.com/joaogarin/carte-blanche-angular2/commit/dc46c211c11b9009145d55c3ee9bd9573308c835))
+
+#### Features
+
+* **playlist:**  Added support for basic playlist rendering ([312fdb15](https://github.com/joaogarin/carte-blanche-angular2/commit/312fdb1553e444e71a796b8a526397a6654aa98d))
+
+
+
 # Change Log
 
 ## [v0.1.1](https://github.com/joaogarin/carte-blanche-angular2/tree/v0.1.1) (2016-09-07)

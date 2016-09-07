@@ -14,8 +14,7 @@ import { PlaylistList } from './components/playlistList/playlistList.component.t
     selector: '.cb-angular', // <app></app>
     // The template for our app
     template: `
-    <cb-playlist-list [frontendOptions]="frontendOptions" [componentPath]="componentPath" [componentName]="componentName" [componentObj]="componentObj"></cb-playlist-list>
-    `
+    <cb-playlist-list [frontendOptions]="frontendOptions" [componentPath]="componentPath" [componentName]="componentName" [componentObj]="componentObj"></cb-playlist-list>`
 })
 export class AppComponent implements OnInit {
     componentName: string;

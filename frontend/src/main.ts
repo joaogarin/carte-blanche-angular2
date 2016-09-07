@@ -41,7 +41,7 @@ import { DynamicOutlet } from './app/components/dynamicOutlet/dynamicOutlet.comp
   ], // additional providers
   bootstrap: [AppComponent],
 })
-export class MyAppModule { }
+export class MyAppModule {}
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject

@@ -12,4 +12,4 @@ subtitle = "Changelog"
 # Do not use with outfile or infile fields!
 #
 # Defaults to stdout when omitted
-changelog = "mychangelog.md"
+changelog = "CHANGELOG.md"

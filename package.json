@@ -89,5 +89,9 @@
     "postinstall": "npm run typings-install",
     "prepublish": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "release": {
+    "debug": false,
+    "branch": "master"
   }
 }

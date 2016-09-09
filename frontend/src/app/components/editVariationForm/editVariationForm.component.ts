@@ -6,7 +6,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { RuntimeCompiler } from "@angular/compiler";
 
 import { ButtonComponent } from './../common/index.ts';
-import { ComponentMetadataResolver } from './../../services/index.ts';
+import { ComponentMetadataResolver, VariationsResolverService } from './../../services/index.ts';
+import { Subscription }   from 'rxjs/Subscription';
 
 // Get our control types
 import { defaultControls, ControlsModule } from './../../controls/index.ts';
@@ -22,7 +23,7 @@ import { defaultControls, ControlsModule } from './../../controls/index.ts';
             <div *ngFor="let input of inputs; let i = index" formGroupName="inputs">
                 <div [id]="input.name" #text></div>
             </div>
-            <cb-button [buttonType]="buttonClass" type="submit" [disabled]="!variationPropertiesForm.valid">Submit project</cb-button>
+            <cb-button (click)="persistVariation()" [buttonType]="buttonClass" type="submit" [disabled]="!variationPropertiesForm.valid">Submit project</cb-button>
        </form>
     </div>
     `
@@ -43,7 +44,14 @@ export class EditVariationFormComponent implements OnInit {
         inputs: this.inputsGroup,
     });
 
-    constructor(private metaDataResolver: ComponentMetadataResolver, private compiler: RuntimeCompiler) { }
+    subscription: Subscription;
+
+    constructor(private metaDataResolver: ComponentMetadataResolver, private variationsResolver: VariationsResolverService, private compiler: RuntimeCompiler) {
+        this.subscription = variationsResolver.variationUpdated$.subscribe(
+            input => {
+                console.log(input);
+            });
+    }
 
     ngOnInit() {
         // Save a copy so we dont manipulate the input when binding to the form
@@ -129,8 +137,19 @@ export class EditVariationFormComponent implements OnInit {
     generateInputTypeControls() {
         this.component.inputs.forEach(input => {
             this.inputsGroup.addControl(input.name, new FormControl(this.variationDataCopy[input.name]));
-            this.inputsGroup.addControl(input.name, new FormControl(input.type.name));
             this.inputs = [...this.inputs, input];
         });
+    }
+
+    /**
+     * Update the variation
+     */
+    persistVariation() {
+        console.log(this.variationPropertiesForm);
+    }
+
+    ngOnDestroy() {
+        // prevent memory leak when component destroyed
+        this.subscription.unsubscribe();
     }
 }

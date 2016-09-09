@@ -19,7 +19,7 @@ import {AppComponent} from './app/app.ts';
 /**
  * import services
  */
-import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator } from './app/services/index.ts';
+import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator, VariationsResolverService } from './app/services/index.ts';
 
 /**
  * import components
@@ -51,6 +51,7 @@ import { EditVariationFormComponent } from './app/components/editVariationForm/e
     ComponentGenerator,
     fakerDataGenerator,
     ComponentMetadataResolver,
+    VariationsResolverService,
   ], // additional providers
   bootstrap: [AppComponent],
 })

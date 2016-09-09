@@ -1,9 +1,11 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardComponent } from './../common/card/card.component.ts';
 import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
+
+import { EditVariationFormComponent } from './../editVariationForm/editVariationForm.component.ts';
 
 @Component({
     // The selector is what angular internally uses
@@ -18,7 +20,6 @@ import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
         flex-direction: column;
         position: relative;
     }
-
     .playground-card {
         width: 90%;
         display: -webkit-box;
@@ -40,20 +41,31 @@ import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
     template: `<div class="wrapper">
     <h2 class="title">{{variationData.name}}</h2>
     <div class="playground-card">
+        <cb-edit-button [size]="24" (click)="toggleModal()"></cb-edit-button>
         <cb-card>
             <cb-dynamic-outlet [componentPath]="componentPath" [component]="component" [variationData]="variationData"></cb-dynamic-outlet>
         </cb-card>
+        <cb-modal [visible]="showModal" (onClose)="toggleModal()">
+            <cb-edit-variation-form (onChanged)="persistVariation()" [variationData]="variationData" [inputsCustomMeta]="inputsCustomMeta"></cb-edit-variation-form>
+        </cb-modal>
     </div>
     </div>`,
 })
-export class Playlist implements OnChanges {
+export class Playlist {
     @Input() component: any;
     @Input() componentPath: string;
     @Input() variationData: Object;
+    @Input() inputsCustomMeta: any;
 
-    constructor() {}
+    showModal: boolean = false;
 
-    ngOnChanges() {
-        
+    constructor() { }
+
+    toggleModal() {
+        this.showModal = !this.showModal;
+    }
+
+    persistVariation() {
+
     }
 }

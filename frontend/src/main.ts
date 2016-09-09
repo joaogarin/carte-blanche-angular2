@@ -29,9 +29,22 @@ import { customMetadataFormComponent } from './app/components/customMetadataForm
 import { Playlist } from './app/components/playlist/playlist.component.ts';
 import { PlaylistList } from './app/components/playlistList/playlistList.component.ts';
 import { DynamicOutlet } from './app/components/dynamicOutlet/dynamicOutlet.component.ts';
+import { EditVariationFormComponent } from './app/components/editVariationForm/editVariationForm.component.ts';
 
 @NgModule({
-  declarations: [AppComponent, ButtonComponent, CardComponent, CreateVariationButtonComponent, createVariationFormComponent, EditButtonComponent, ModalComponent, customMetadataFormComponent, Playlist, PlaylistList, DynamicOutlet], // directives, components, and pipes owned by this NgModule
+  declarations: [AppComponent,
+    ButtonComponent,
+    CardComponent,
+    CreateVariationButtonComponent,
+    createVariationFormComponent,
+    EditButtonComponent,
+    ModalComponent,
+    customMetadataFormComponent,
+    Playlist,
+    PlaylistList,
+    DynamicOutlet,
+    EditVariationFormComponent,
+  ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule],
   providers: [
     ...COMPILER_PROVIDERS,
@@ -41,7 +54,7 @@ import { DynamicOutlet } from './app/components/dynamicOutlet/dynamicOutlet.comp
   ], // additional providers
   bootstrap: [AppComponent],
 })
-export class MyAppModule {}
+export class MyAppModule { }
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject

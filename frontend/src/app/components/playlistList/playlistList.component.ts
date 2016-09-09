@@ -32,7 +32,7 @@ import { ComponentGenerator, ComponentMetadataResolver } from './../../services/
             <cb-customm-metadata-form (changed)="componentPropsChange()" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-customm-metadata-form>
         </cb-modal>
         <div *ngFor="let variation of variations; let i = index">
-            <cb-playlist *ngIf="loadedCustomData" [componentPath]="componentPath" [component]="component" [variationData]="variation"></cb-playlist>
+            <cb-playlist *ngIf="loadedCustomData" [componentPath]="componentPath" [component]="component" [variationData]="variation" [inputsCustomMeta]="inputsCustomMeta"></cb-playlist>
         </div>
         <cb-create-variation-button (onCreateVariation)="submitVariation($event)"></cb-create-variation-button>
     </div>`,

@@ -1,5 +1,5 @@
 export const controlTypes = [
-  'bool',
+  'boolean',
   'string',
   'sentence',
   'words',

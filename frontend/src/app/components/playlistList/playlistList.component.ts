@@ -105,6 +105,10 @@ export class PlaylistList {
         });
     }
 
+    cleanVariations() {
+        this.variations = [];
+    }
+
     /**
      * Event called by the creat variation component
      * 
@@ -112,8 +116,9 @@ export class PlaylistList {
      * The name of the variation to be created
      */
     submitVariation(variation) {
+        console.log('Submit variation for ', this.inputsCustomMeta);
         this.metaDataResolver.saveVariation('localhost', '7000', variation.name, variation.name, this.inputsCustomMeta, this.componentPath, (response) => {
-            console.log('Saved variation', response);
+            this.cleanVariations();
             this.getVariations();
         });
     }

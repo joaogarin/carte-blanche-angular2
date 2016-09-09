@@ -88,12 +88,12 @@ export class ComponentMetadataResolver {
      * @param {function} cb
      * Callback to run after the http request was sent
      */
-    saveVariation(host, port, name, slug, props, componentPath, cb) {
+    saveVariation(host, port, name, slug, inputData, componentPath, cb) {
         let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
         let post_options = new RequestOptions({ headers: headers });
 
         const data = this.getVariationStringFromProps({
-            props: this.getRandomValues(props),
+            props: this.getRandomValues(Object.assign({},inputData)),
             name,
         });
         let body = JSON.stringify({

@@ -65,7 +65,7 @@ export class EditVariationFormComponent implements OnInit {
             this.compiler.compileModuleAndAllComponentsAsync(ControlsModule).then((moduleWithComponentFactory) => {
                 const compFactory = moduleWithComponentFactory.componentFactories
                     .find(x => x.componentType === this.getControlType(input.type.name));
-                this.generateInputFormControl(compFactory, input);
+                compFactory ? this.generateInputFormControl(compFactory, input) : '';
             });
         });
     }

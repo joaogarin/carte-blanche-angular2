@@ -20,6 +20,7 @@ import { EditVariationFormComponent } from './../editVariationForm/editVariation
         flex-direction: column;
         position: relative;
     }
+
     .playground-card {
         width: 90%;
         display: -webkit-box;
@@ -46,7 +47,7 @@ import { EditVariationFormComponent } from './../editVariationForm/editVariation
             <cb-dynamic-outlet [componentPath]="componentPath" [component]="component" [variationData]="variationData"></cb-dynamic-outlet>
         </cb-card>
         <cb-modal [visible]="showModal" (onClose)="toggleModal()">
-            <cb-edit-variation-form (onChanged)="persistVariation()" [variationData]="variationData" [inputsCustomMeta]="inputsCustomMeta"></cb-edit-variation-form>
+            <cb-edit-variation-form (onChanged)="persistVariation()" [component]="component" [variationData]="variationData" [inputsCustomMeta]="inputsCustomMeta"></cb-edit-variation-form>
         </cb-modal>
     </div>
     </div>`,

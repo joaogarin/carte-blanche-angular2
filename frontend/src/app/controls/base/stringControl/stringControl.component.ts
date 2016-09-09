@@ -9,18 +9,18 @@ import { Component, Input } from '@angular/core';
     styles: [``],
     template: `
     <div>
-    <label>{{variationEl.name}}</label>
-        <input type="text" [value]="variationEl.props[Elkey]"/>
+    <label>{{label}}</label>
+        <input type="text" [value]="value"/>
     </div>
     `,
 })
 export class StringControlComponent {
-    @Input() variationEl: any;
-    Elkey: string;
+    @Input() label: string;
+    @Input() value: string;
 
     constructor() { }
 
     ngOnInit() {
-        this.Elkey = Object.keys(this.variationEl.props)[0];
+        
     }
 }

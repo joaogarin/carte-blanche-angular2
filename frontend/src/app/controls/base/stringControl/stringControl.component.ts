@@ -2,6 +2,8 @@
  * Angular 2 decorators and services
  */
 import { Component, Input } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+
 import { VariationsResolverService } from './../../../services/index.ts';
 
 @Component({
@@ -9,19 +11,22 @@ import { VariationsResolverService } from './../../../services/index.ts';
     selector: 'cb-string-control',
     styles: [``],
     template: `
-    <div>
-    <label>{{label}}</label>
-        <input [value]="value" (keypress)="update($event)" type="text"/>
+    <div [formGroup]="group">
+        <label>{{label}}</label>
+        <input type="text" [value]="value" formControlName="item" />
     </div>
     `,
 })
 export class StringControlComponent {
     @Input() label: string;
     @Input() value: string;
+    @Input() group: FormGroup;
 
     constructor(private variationsResolver: VariationsResolverService) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        console.log(this.group);
+    }
 
     update(event) {
         this.variationsResolver.updateVariationInput(this.label, event.target.value);

@@ -109,6 +109,7 @@ export class EditVariationFormComponent implements OnInit {
             //Put in the necessary inputs (variation props)
             cmpRef.instance['label'] = input.name;
             cmpRef.instance['value'] = this.variationData['props'][input.name];
+            cmpRef.instance['group'] = this.inputsGroup.controls[input.name];
         }
     }
 
@@ -136,7 +137,9 @@ export class EditVariationFormComponent implements OnInit {
      */
     generateInputTypeControls() {
         this.component.inputs.forEach(input => {
-            this.inputsGroup.addControl(input.name, new FormControl(this.variationDataCopy[input.name]));
+            this.inputsGroup.addControl(input.name, new FormGroup({
+                item: new FormControl(this.variationDataCopy[input.name])
+            }));
             this.inputs = [...this.inputs, input];
         });
     }

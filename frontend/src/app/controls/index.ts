@@ -8,5 +8,4 @@ export const defaultControls = {
   },
 };
 
-export { StringControlComponent } from './base/stringControl/stringControl.component.ts';
 export { ControlsModule } from './controls.module.ts';

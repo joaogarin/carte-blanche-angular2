@@ -9,7 +9,7 @@ import { ButtonComponent } from './../common/index.ts';
 import { ComponentMetadataResolver } from './../../services/index.ts';
 
 // Get our control types
-import { defaultControls, StringControlComponent, ControlsModule } from './../../controls/index.ts';
+import { defaultControls, ControlsModule } from './../../controls/index.ts';
 
 @Component({
     selector: 'cb-edit-variation-form',
@@ -43,7 +43,7 @@ export class EditVariationFormComponent implements OnInit {
         inputs: this.inputsGroup,
     });
 
-    constructor(private metaDataResolver: ComponentMetadataResolver, private compiler: RuntimeCompiler) {}
+    constructor(private metaDataResolver: ComponentMetadataResolver, private compiler: RuntimeCompiler) { }
 
     ngOnInit() {
         // Save a copy so we dont manipulate the input when binding to the form
@@ -64,10 +64,23 @@ export class EditVariationFormComponent implements OnInit {
         this.component.inputs.forEach(input => {
             this.compiler.compileModuleAndAllComponentsAsync(ControlsModule).then((moduleWithComponentFactory) => {
                 const compFactory = moduleWithComponentFactory.componentFactories
-                    .find(x => x.componentType === StringControlComponent);
+                    .find(x => x.componentType === this.getControlType(input.type.name));
                 this.generateInputFormControl(compFactory, input);
             });
         });
+    }
+
+    /**
+     * Find the correct control type based on the input type
+     * 
+     * @params {string} inputType
+     * The type of the input
+     * 
+     * @return {ComponentFactory<any>.componentType: Type<any>} Type
+     * The component type to render
+     */
+    getControlType(inputType) {
+        return defaultControls[inputType].control;
     }
 
     /**

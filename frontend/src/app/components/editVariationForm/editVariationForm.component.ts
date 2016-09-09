@@ -6,7 +6,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { RuntimeCompiler } from "@angular/compiler";
 
 import { ButtonComponent } from './../common/index.ts';
-import { ComponentMetadataResolver, VariationsResolverService } from './../../services/index.ts';
+import { ComponentMetadataResolver } from './../../services/index.ts';
 import { Subscription }   from 'rxjs/Subscription';
 
 // Get our control types
@@ -44,14 +44,7 @@ export class EditVariationFormComponent implements OnInit {
         inputs: this.inputsGroup,
     });
 
-    subscription: Subscription;
-
-    constructor(private metaDataResolver: ComponentMetadataResolver, private variationsResolver: VariationsResolverService, private compiler: RuntimeCompiler) {
-        this.subscription = variationsResolver.variationUpdated$.subscribe(
-            input => {
-                console.log(input);
-            });
-    }
+    constructor(private metaDataResolver: ComponentMetadataResolver, private compiler: RuntimeCompiler) {}
 
     ngOnInit() {
         // Save a copy so we dont manipulate the input when binding to the form
@@ -109,7 +102,7 @@ export class EditVariationFormComponent implements OnInit {
             //Put in the necessary inputs (variation props)
             cmpRef.instance['label'] = input.name;
             cmpRef.instance['value'] = this.variationData['props'][input.name];
-            cmpRef.instance['group'] = this.inputsGroup.controls[input.name];
+            cmpRef.instance['inputGroup'] = this.inputsGroup.controls[input.name];
         }
     }
 
@@ -145,14 +138,14 @@ export class EditVariationFormComponent implements OnInit {
     }
 
     /**
-     * Update the variation
+     * Submit the form
      */
     persistVariation() {
-        console.log(this.variationPropertiesForm);
-    }
-
-    ngOnDestroy() {
-        // prevent memory leak when component destroyed
-        this.subscription.unsubscribe();
+        let variationInputsObject = {};
+        this.component.inputs.forEach(input => {
+            variationInputsObject[input.name] = this.inputsGroup.controls[input.name]['controls']['item'].value;
+        });
+        console.log(variationInputsObject);
+        this.onChanged.emit(variationInputsObject);
     }
 }

@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CardComponent } from './../common/card/card.component.ts';
 import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
 
@@ -47,7 +47,7 @@ import { EditVariationFormComponent } from './../editVariationForm/editVariation
             <cb-dynamic-outlet [componentPath]="componentPath" [component]="component" [variationData]="variationData"></cb-dynamic-outlet>
         </cb-card>
         <cb-modal [visible]="showModal" (onClose)="toggleModal()">
-            <cb-edit-variation-form (onChanged)="persistVariation()" [component]="component" [variationData]="variationData" [inputsCustomMeta]="inputsCustomMeta"></cb-edit-variation-form>
+            <cb-edit-variation-form (onChanged)="persistVariation($event);"  [component]="component" [variationData]="variationData" [inputsCustomMeta]="inputsCustomMeta"></cb-edit-variation-form>
         </cb-modal>
     </div>
     </div>`,
@@ -55,8 +55,9 @@ import { EditVariationFormComponent } from './../editVariationForm/editVariation
 export class Playlist {
     @Input() component: any;
     @Input() componentPath: string;
-    @Input() variationData: Object;
+    @Input() variationData: any;
     @Input() inputsCustomMeta: any;
+    @Output() onChanged = new EventEmitter();
 
     showModal: boolean = false;
 
@@ -66,7 +67,10 @@ export class Playlist {
         this.showModal = !this.showModal;
     }
 
-    persistVariation() {
-
+    persistVariation(variationData) {
+        this.onChanged.emit({
+            name: this.variationData.name,
+            data: variationData
+        });
     }
 }

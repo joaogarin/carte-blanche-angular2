@@ -1,9 +1,11 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CardComponent } from './../common/card/card.component.ts';
 import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
+
+import { EditVariationFormComponent } from './../editVariationForm/editVariationForm.component.ts';
 
 @Component({
     // The selector is what angular internally uses
@@ -40,20 +42,41 @@ import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
     template: `<div class="wrapper">
     <h2 class="title">{{variationData.name}}</h2>
     <div class="playground-card">
+        <cb-edit-button [size]="24" (click)="toggleModal()"></cb-edit-button>
+        <cb-delete-button [size]="24" (click)="deleteVariation()"></cb-delete-button>
         <cb-card>
             <cb-dynamic-outlet [componentPath]="componentPath" [component]="component" [variationData]="variationData"></cb-dynamic-outlet>
         </cb-card>
+        <cb-modal [visible]="showModal" (onClose)="toggleModal()">
+            <cb-edit-variation-form (onChanged)="persistVariation($event);"  [component]="component" [variationData]="variationData" [inputsCustomMeta]="inputsCustomMeta"></cb-edit-variation-form>
+        </cb-modal>
     </div>
     </div>`,
 })
-export class Playlist implements OnChanges {
+export class Playlist {
     @Input() component: any;
     @Input() componentPath: string;
-    @Input() variationData: Object;
+    @Input() variationData: any;
+    @Input() inputsCustomMeta: any;
+    @Output() onChanged = new EventEmitter();
+    @Output() onDeleted = new EventEmitter();
 
-    constructor() {}
+    showModal: boolean = false;
 
-    ngOnChanges() {
-        
+    constructor() { }
+
+    toggleModal() {
+        this.showModal = !this.showModal;
+    }
+
+    persistVariation(variationData) {
+        this.onChanged.emit({
+            name: this.variationData.name,
+            data: variationData
+        });
+    }
+
+    deleteVariation() {
+        this.onDeleted.emit(this.variationData);
     }
 }

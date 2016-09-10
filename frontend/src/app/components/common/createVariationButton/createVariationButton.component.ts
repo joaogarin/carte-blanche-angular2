@@ -121,5 +121,6 @@ export class CreateVariationButtonComponent {
    */
   SubmitForm(variation) {
     this.onCreateVariation.emit(variation);
+    this.toggleFormHidden();
   }
 }

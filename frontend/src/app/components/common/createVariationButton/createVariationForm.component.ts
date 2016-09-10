@@ -68,5 +68,6 @@ export class createVariationFormComponent {
         this.onCreateVariation.emit({
             name: this.createVariationForm.controls['name'].value
         });
+        this.createVariationForm.reset();
     }
 }

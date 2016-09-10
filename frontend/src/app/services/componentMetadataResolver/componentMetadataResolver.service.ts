@@ -88,12 +88,59 @@ export class ComponentMetadataResolver {
      * @param {function} cb
      * Callback to run after the http request was sent
      */
-    saveVariation(host, port, name, slug, props, componentPath, cb) {
+    saveVariation(host, port, name, slug, inputData, componentPath, cb) {
         let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
         let post_options = new RequestOptions({ headers: headers });
 
         const data = this.getVariationStringFromProps({
-            props: this.getRandomValues(props),
+            props: this.getRandomValues(Object.assign({},inputData)),
+            name,
+        });
+        let body = JSON.stringify({
+            variation: `${slug}`,
+            code: data,
+        });
+
+        this.http.post(
+            `http://${host}:${port}/variations/${componentPath}`,
+            body,
+            post_options)
+            .subscribe(
+            response => {
+                cb(response);
+            },
+            err => console.error(err),
+            () => console.log('')
+            );
+    }
+
+    /**
+     * Save a component existing variation
+     * 
+     * @param {string} host 
+     * The host where the server is set
+     * 
+     * @param {string} port
+     * the port where the server is running
+     * 
+     * @param {string} slug
+     * the slug for the variation
+     * 
+     * @param {Object} props
+     * The custom metadata inputs for the component
+     * 
+     * @param {string} componentPath
+     * The component path
+     * 
+     * @param {function} cb
+     * Callback to run after the http request was sent
+     */
+    persistVariation(host, port, name, slug, inputData, componentPath, cb) {
+        let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
+        let post_options = new RequestOptions({ headers: headers });
+
+        const data = this.getVariationStringFromProps({
+            props: Object.assign({},inputData),
             name,
         });
         let body = JSON.stringify({
@@ -173,4 +220,33 @@ export class ComponentMetadataResolver {
         return addDataToVariation(propsString, { name });
     };
 
+    /**
+     * Delete a given variation 
+     * 
+     * @param {string} host 
+     * The host where the server is set
+     * 
+     * @param {string} port
+     * the port where the server is running
+     * 
+     * @param {string} componentPath
+     * The component path
+     */
+    deleteVariation(host, port, name, slug, componentPath, cb) {
+        this.http.delete(`http://${host}:${port}/variations/${componentPath}?variation=${name}`).subscribe(
+            (response: any) => {
+                if (response.status == 200) {
+                    console.log('deleted variation');
+                    cb(response);   
+                }
+                else {
+                    cb(false);
+                }
+            },
+            (err) => {
+                console.log(err);
+            },
+            () => { }
+        );
+    }
 }

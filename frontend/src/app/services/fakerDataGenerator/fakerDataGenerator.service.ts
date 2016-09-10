@@ -9,10 +9,12 @@ export class fakerDataGenerator {
      * @param {type} 
      * the type of input to generate metadata for
      */
-    getFakerData(type) {
+    getFakerData(type): any {
         switch (type) {
             case 'string':
                 return faker.lorem.sentence();
+            case 'boolean':
+                return Math.random() > 0.5;
             case 'sentence':
                 return faker.lorem.sentence();
             case 'image':

@@ -24,7 +24,7 @@ import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator } fro
 /**
  * import components
  */
-import { ButtonComponent, CardComponent, CreateVariationButtonComponent, createVariationFormComponent, EditButtonComponent, ModalComponent } from './app/components/common/index.ts';
+import { ButtonComponent, CardComponent, CreateVariationButtonComponent, createVariationFormComponent, EditButtonComponent, DeleteButtonComponent, ModalComponent } from './app/components/common/index.ts';
 import { customMetadataFormComponent } from './app/components/customMetadataForm/customMetadataForm.component.ts';
 import { Playlist } from './app/components/playlist/playlist.component.ts';
 import { PlaylistList } from './app/components/playlistList/playlistList.component.ts';
@@ -38,6 +38,7 @@ import { EditVariationFormComponent } from './app/components/editVariationForm/e
     CreateVariationButtonComponent,
     createVariationFormComponent,
     EditButtonComponent,
+    DeleteButtonComponent,
     ModalComponent,
     customMetadataFormComponent,
     Playlist,

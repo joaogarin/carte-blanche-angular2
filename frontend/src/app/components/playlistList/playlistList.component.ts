@@ -32,7 +32,7 @@ import { ComponentGenerator, ComponentMetadataResolver } from './../../services/
             <cb-customm-metadata-form (changed)="componentPropsChange()" [componentPath]="componentPath" [component]="component" [inputsCustomMeta]="inputsCustomMeta"></cb-customm-metadata-form>
         </cb-modal>
         <div *ngFor="let variation of variations; let i = index">
-            <cb-playlist *ngIf="loadedCustomData" (onChanged)="persistVariation($event);" [componentPath]="componentPath" [component]="component" [variationData]="variation" [inputsCustomMeta]="inputsCustomMeta"></cb-playlist>
+            <cb-playlist *ngIf="loadedCustomData" (onDeleted)="deleteVariation($event);" (onChanged)="persistVariation($event);" [componentPath]="componentPath" [component]="component" [variationData]="variation" [inputsCustomMeta]="inputsCustomMeta"></cb-playlist>
         </div>
         <cb-create-variation-button (onCreateVariation)="submitVariation($event)"></cb-create-variation-button>
     </div>`,
@@ -130,6 +130,16 @@ export class PlaylistList {
         this.metaDataResolver.persistVariation('localhost', '7000', variation.name, variation.name, variation.data, this.componentPath, (response) => {
             this.cleanVariations();
             this.getVariations();
+        });
+    }
+
+    deleteVariation(variation) {
+        console.log('Delete variation ', variation.name);
+        this.metaDataResolver.deleteVariation('localhost', '7000', variation.name, variation.name, this.componentPath, (response) => {
+            if (response) {
+                this.cleanVariations();
+                this.getVariations();
+            }
         });
     }
 }

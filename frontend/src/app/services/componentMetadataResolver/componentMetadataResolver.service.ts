@@ -220,4 +220,33 @@ export class ComponentMetadataResolver {
         return addDataToVariation(propsString, { name });
     };
 
+    /**
+     * Delete a given variation 
+     * 
+     * @param {string} host 
+     * The host where the server is set
+     * 
+     * @param {string} port
+     * the port where the server is running
+     * 
+     * @param {string} componentPath
+     * The component path
+     */
+    deleteVariation(host, port, name, slug, componentPath, cb) {
+        this.http.delete(`http://${host}:${port}/variations/${componentPath}?variation=${name}`).subscribe(
+            (response: any) => {
+                if (response.status == 200) {
+                    console.log('deleted variation');
+                    cb(response);   
+                }
+                else {
+                    cb(false);
+                }
+            },
+            (err) => {
+                console.log(err);
+            },
+            () => { }
+        );
+    }
 }

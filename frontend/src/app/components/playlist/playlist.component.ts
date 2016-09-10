@@ -43,6 +43,7 @@ import { EditVariationFormComponent } from './../editVariationForm/editVariation
     <h2 class="title">{{variationData.name}}</h2>
     <div class="playground-card">
         <cb-edit-button [size]="24" (click)="toggleModal()"></cb-edit-button>
+        <cb-delete-button [size]="24" (click)="deleteVariation()"></cb-delete-button>
         <cb-card>
             <cb-dynamic-outlet [componentPath]="componentPath" [component]="component" [variationData]="variationData"></cb-dynamic-outlet>
         </cb-card>
@@ -58,6 +59,7 @@ export class Playlist {
     @Input() variationData: any;
     @Input() inputsCustomMeta: any;
     @Output() onChanged = new EventEmitter();
+    @Output() onDeleted = new EventEmitter();
 
     showModal: boolean = false;
 
@@ -72,5 +74,9 @@ export class Playlist {
             name: this.variationData.name,
             data: variationData
         });
+    }
+
+    deleteVariation() {
+        this.onDeleted.emit(this.variationData);
     }
 }

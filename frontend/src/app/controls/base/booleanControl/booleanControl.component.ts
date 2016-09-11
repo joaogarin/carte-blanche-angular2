@@ -10,8 +10,8 @@ import { FormGroup, FormControl } from '@angular/forms';
     styles: [``],
     template: `
     <div [formGroup]="inputGroup">
-    <label>{{label}}</label>
-       <select formControlName="item" [(ngModel)]="value">
+    <label for="BooleanSelect">{{label}}</label>
+       <select id="BooleanSelect" formControlName="item" [(ngModel)]="value">
             <option [ngValue]="true">True</option>
             <option [ngValue]="false">False</option>
         </select>

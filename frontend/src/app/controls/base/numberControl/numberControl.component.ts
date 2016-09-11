@@ -6,16 +6,16 @@ import { FormGroup } from '@angular/forms';
 
 @Component({
     // The selector is what angular internally uses
-    selector: 'cb-string-control',
+    selector: 'cb-number-control',
     styles: [``],
     template: `
     <div [formGroup]="inputGroup">
-        <label for="stringElement">{{label}}</label>
-        <input id="stringElement" type="text" [(ngModel)]="value" formControlName="item" />
+        <label for="numberElement">{{label}}</label>
+        <input id="numberElement" type="number" [(ngModel)]="value" formControlName="item" required/>
     </div>
     `,
 })
-export class StringControlComponent {
+export class NumberControlComponent {
     @Input() label: string;
     @Input() value: string;
     @Input() inputGroup: FormGroup;

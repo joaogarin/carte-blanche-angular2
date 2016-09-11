@@ -2,7 +2,7 @@
  * Angular 2 decorators and services
  */
 import { Component, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     // The selector is what angular internally uses

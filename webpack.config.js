@@ -44,7 +44,7 @@ var common_config = {
         ],
     },
     plugins: [
-        //new webpack.optimize.CommonsChunkPlugin({ name: ['frontend/index', 'frontend/polyfills'], minChunks: Infinity }),
+        //new webpack.optimize.CommonsChunkPlugin({ name: ['frontend/index', 'frontend/polyfills', 'frontend/vendor'], minChunks: Infinity }),
     ],
     // Other module loader config
     tslint: {
@@ -90,9 +90,23 @@ var polyfill_config = {
     },
 };
 
+var vendor_config = {
+    output: {
+        filename: '[name].js',
+        //library: 'carte_blanche_angular2',
+        path: path.join(__dirname, 'dist'), // where to place webpack files
+        sourceMapFilename: '[name].map',
+    },
+    entry: {
+        'frontend/vendor': './frontend/vendor.ts',
+    },
+};
+
 module.exports = [
     // Frontend
     webpackMerge({}, common_config, frontend_config),
     // Polyfill
     webpackMerge({}, common_config, polyfill_config),
+    // Vendor
+    webpackMerge({}, common_config, vendor_config),
 ]

@@ -127,6 +127,7 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
         });
         compilation.plugin('carte-blanche-plugin-assets-processing', function (assets) {
             assets.push(path.join(__dirname, './frontend/polyfills.js'));
+            assets.push(path.join(__dirname, './frontend/vendor.js'));
         });
         // Called after the processing, gets the renderToClient API to visually
         compilation.plugin(

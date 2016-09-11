@@ -29,6 +29,7 @@ import { customMetadataFormComponent } from './app/components/customMetadataForm
 import { Playlist } from './app/components/playlist/playlist.component.ts';
 import { PlaylistList } from './app/components/playlistList/playlistList.component.ts';
 import { DynamicOutlet } from './app/components/dynamicOutlet/dynamicOutlet.component.ts';
+import { IframeComponent } from './app/components/iframe/iframe.component.ts';
 import { EditVariationFormComponent } from './app/components/editVariationForm/editVariationForm.component.ts';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { EditVariationFormComponent } from './app/components/editVariationForm/e
     Playlist,
     PlaylistList,
     DynamicOutlet,
+    IframeComponent,
     EditVariationFormComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule],

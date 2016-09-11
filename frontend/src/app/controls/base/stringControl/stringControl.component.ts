@@ -11,7 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
     template: `
     <div [formGroup]="inputGroup">
         <label>{{label}}</label>
-        <input type="text" [value]="value" formControlName="item" />
+        <input type="text" [(ngModel)]="value" formControlName="item" />
     </div>
     `,
 })

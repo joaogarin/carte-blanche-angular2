@@ -12,7 +12,7 @@ var options = {
     'ignoreCompilerErrors': 'true',
     'experimentalDecorators': 'true',
     'emitDecoratorMetadata': 'true',
-    'target': 'ES5',
+    'target': 'ES6',
     'moduleResolution': 'node',
     'preserveConstEnums': 'true',
     'stripInternal': 'true',

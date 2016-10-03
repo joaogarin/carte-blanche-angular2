@@ -1,4 +1,5 @@
-import { Injectable, Component, Input, ComponentMetadata, ComponentFactory, ComponentFactoryResolver, NgModule } from '@angular/core';
+import { Injectable, Component, Input, ComponentFactory, ComponentFactoryResolver, NgModule } from '@angular/core';
+import { } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RuntimeCompiler } from "@angular/compiler";
 import { MyAppModule } from './../../../main.ts';
@@ -19,8 +20,8 @@ export class ComponentGenerator {
      * This component's metadata
      * 
      */
-    createMetadata(componentDecorator): ComponentMetadata {
-        return new ComponentMetadata({
+    createMetadata(componentDecorator): Component {
+        return new Component({
             selector: 'cb-dynamic-outlet',
             styles: [componentDecorator.styles[0]],
             template: componentDecorator.template,

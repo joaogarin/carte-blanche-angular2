@@ -1,8 +1,7 @@
 /*
  * Providers provided by Angular
  */
-import { enableProdMode } from '@angular/core';
-import { NgModule } from '@angular/core';
+import { enableProdMode, NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';

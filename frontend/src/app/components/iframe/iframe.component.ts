@@ -1,7 +1,7 @@
 /*
  * Angular 2 decorators and services
  */
-import {Component, Input, OnInit, ElementRef, Injector} from '@angular/core';
+import { Component, Input, OnInit, ElementRef, Injector } from '@angular/core';
 import * as path from 'path';
 
 import { VariationData } from './../../utils/index.ts';
@@ -44,8 +44,9 @@ export class IframeComponent implements OnInit {
     }
 
     createHTML(userbundle) {
-        console.log(this.variationData.props);
+        let componentDecorator = this.getDecoratorObject(this.component.componentDecorators[0].arguments.obj);
         let inputs = JSON.stringify(this.variationData.props);
+        
         return `<!DOCTYPE html>
     <html style="height: 100%; width: 100%; margin: 0; padding: 0;">
         <head>
@@ -60,7 +61,7 @@ export class IframeComponent implements OnInit {
             height: 100vh;
             ">
         <cb-app style="display: none;"></cb-app>
-        <cb-wrapper data-component='cb-button' data-inputs='${inputs}'></cb-wrapper>
+        <cb-wrapper data-component='${componentDecorator.selector}' data-inputs='${inputs}'></cb-wrapper>
         </div>
             <script type="text/javascript">
                 window.COMPONENT_PATH = '/${this.componentPath}';
@@ -68,5 +69,19 @@ export class IframeComponent implements OnInit {
             <script type="text/javascript" src="http://localhost:3000/main.js"></script></body>
         </body>
     </html>`;
+    }
+
+    /**
+     * Parse the decorator we get from typedoc and return the object associated with it. The decorator comes 
+     * as a string and can contain comments that is why we use eval() and not JSON.parse().
+     * 
+     * @param {string} decoratorString
+     * The string representation of the decorator
+     * 
+     * @TODO - Clean this up and try a better way of getting this info without using eval()
+     * 
+     */
+    getDecoratorObject(decoratorString) {
+        return eval("(" + decoratorString + ")");
     }
 }

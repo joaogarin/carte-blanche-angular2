@@ -14,7 +14,7 @@ import { VariationData } from './../../utils/index.ts';
     // The selector is what angular internally uses
     selector: 'cb-iframe', // <app></app>
     // The template for our app
-    template: `<iframe scrolling="no" frameBorder="0" style="width: '100%', height: '100%'"></iframe>
+    template: `<iframe scrolling="no" frameBorder="0" style="width: '100%'; height: '100%'"></iframe>
   `
 })
 export class IframeComponent implements OnInit {
@@ -46,7 +46,7 @@ export class IframeComponent implements OnInit {
     createHTML(userbundle) {
         let componentDecorator = this.getDecoratorObject(this.component.componentDecorators[0].arguments.obj);
         let inputs = JSON.stringify(this.variationData.props);
-        
+
         return `<!DOCTYPE html>
     <html style="height: 100%; width: 100%; margin: 0; padding: 0;">
         <head>

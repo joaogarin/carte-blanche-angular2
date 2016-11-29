@@ -2,18 +2,30 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "jsx": "react"
+    "mapRoot": "",
+    "strictNullChecks": false,
+    "rootDir": ".",
+    "jsx": "react",
+    "types": [
+      "hammerjs",
+      "jasmine",
+      "node",
+      "source-map",
+      "uglify-js",
+      "webpack",
+      "core-js",
+      "react",
+      "faker"
+    ]
   },
   "exclude": [
     "node_modules"
-  ],
-  "filesGlob": [
-    "./frontend/**/*.ts",
-    "./typedocparser.ts",
-    "./typings/index.d.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

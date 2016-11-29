@@ -4,6 +4,8 @@
 import {Component, Input, OnInit, ElementRef, Injector} from '@angular/core';
 import * as path from 'path';
 
+import { VariationData } from './../../utils/index.ts';
+
 /*
  * App Component
  * Top Level Component
@@ -17,6 +19,9 @@ import * as path from 'path';
 })
 export class IframeComponent implements OnInit {
     @Input() basePath: string;
+    @Input() component: any;
+    @Input() componentPath: string;
+    @Input() variationData: VariationData;
     userBundle: string;
     element: HTMLElement;
     iframe: any;
@@ -39,6 +44,8 @@ export class IframeComponent implements OnInit {
     }
 
     createHTML(userbundle) {
+        console.log(this.variationData.props);
+        let inputs = JSON.stringify(this.variationData.props);
         return `<!DOCTYPE html>
     <html style="height: 100%; width: 100%; margin: 0; padding: 0;">
         <head>
@@ -52,13 +59,12 @@ export class IframeComponent implements OnInit {
             align-items: center;
             height: 100vh;
             ">
-        <cb-app>
-            <div class="new-element">
-                <cb-button [text]="Loading Component" [isRed]="false"></cb-button>
-            </div>
-        </cb-app>
-        
+        <cb-app style="display: none;"></cb-app>
+        <cb-wrapper data-component='cb-button' data-inputs='${inputs}'></cb-wrapper>
         </div>
+            <script type="text/javascript">
+                window.COMPONENT_PATH = '/${this.componentPath}';
+            </script>
             <script type="text/javascript" src="http://localhost:3000/main.js"></script></body>
         </body>
     </html>`;

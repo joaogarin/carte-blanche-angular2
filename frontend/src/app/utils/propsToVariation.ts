@@ -17,8 +17,9 @@ export function propsToVariation(rawProps) {
 
     extractAndReplaceFunctions(props);
     let stringifiedProps = `${JSON.stringify({ props }, null, 2)};`;
-    _.forEach(functionStore, (functionSource, id) => {
-        stringifiedProps = stringifiedProps.replace(`"${id}"`, functionSource);
+    _.forEach(functionStore, (functionSource:any, id) => {
+        var re = new RegExp(id);
+        stringifiedProps = stringifiedProps.replace(re, functionSource);
     });
     return stringifiedProps;
 };

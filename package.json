@@ -41,6 +41,17 @@
     "socket.io-client": "^1.4.6"
   },
   "devDependencies": {
+    "@types/core-js": "^0.9.34",
+    "@types/faker": "^3.1.32",
+    "@types/hammerjs": "^2.0.33",
+    "@types/jasmine": "^2.2.34",
+    "@types/lodash": "^4.14.41",
+    "@types/moment-timezone": "^0.2.32",
+    "@types/node": "^6.0.38",
+    "@types/react": "^0.14.51",
+    "@types/source-map": "^0.1.27",
+    "@types/uglify-js": "^2.0.27",
+    "@types/webpack": "^1.12.34",
     "awesome-typescript-loader": "^2.2.4",
     "babel-cli": "^6.9.0",
     "babel-preset-es2015": "",
@@ -71,8 +82,7 @@
     "tslint": "^4.0.2",
     "tslint-loader": "^3.2.0",
     "typedoc": "^0.5.1",
-    "typescript": "~2.0.10",
-    "typings": "^2.0.0",
+    "typescript": "2.0.3",
     "webpack": "^1.13.1",
     "webpack-merge": "^1.0.1"
   },
@@ -82,15 +92,13 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "clean-install": "rm -rf node_modules && rm -rf typings && npm install",
+    "clean-install": "rm -rf node_modules && npm install",
     "build-plugin": "BABEL_DISABLE_CACHE=1 BABEL_ENV=production babel --ignore=node_modules --out-dir='dist' plugin.js typedocparser.js server/server.js server/run.js server/utils/getAbsoluteVariationPath.js",
     "build-frontend": "webpack --config webpack.config.js --progress --profile --colors --display-error-details --display-cached",
     "frontend": "NODE_ENV=production webpack",
     "build": "npm run build-plugin && npm run frontend",
     "webpack-test": "webpack --config webpack.test.js --progress --profile --colors --display-error-details --display-cached",
     "test": "karma start",
-    "typings-install": "typings install",
-    "postinstall": "npm run typings-install",
     "prepublish": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -99,6 +107,6 @@
     "branch": "master"
   },
   "czConfig": {
-    "path":"node_modules/cz-conventional-changelog"
+    "path": "node_modules/cz-conventional-changelog"
   }
 }

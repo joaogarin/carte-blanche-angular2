@@ -13,6 +13,8 @@ export default function playground(frontendData, pluginData, Component, componen
     let componentSource = pluginData.source;
     let options = JSON.stringify(frontendData.options);
 
+    console.log(Component);
+
     // Bootstrap the angular app if we are in a different component
     if (bootstrapedComponentName != componentName) {
         main();

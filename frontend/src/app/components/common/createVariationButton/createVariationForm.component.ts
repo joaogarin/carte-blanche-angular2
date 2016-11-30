@@ -4,7 +4,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { ButtonComponent } from './../../common/index.ts';
+import { ButtonComponent } from './../../common/index';
 
 @Component({
     selector: 'cb-create-variation-form',

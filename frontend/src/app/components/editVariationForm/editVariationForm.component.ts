@@ -5,12 +5,12 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, 
 import { FormGroup, FormControl } from '@angular/forms';
 import { RuntimeCompiler } from "@angular/compiler";
 
-import { ButtonComponent } from './../common/index.ts';
-import { ComponentMetadataResolver } from './../../services/index.ts';
+import { ButtonComponent } from './../common/index';
+import { ComponentMetadataResolver } from './../../services/index';
 import { Subscription }   from 'rxjs/Subscription';
 
 // Get our control types
-import { defaultControls, ControlsModule } from './../../controls/index.ts';
+import { defaultControls, ControlsModule } from './../../controls/index';
 
 @Component({
     selector: 'cb-edit-variation-form',

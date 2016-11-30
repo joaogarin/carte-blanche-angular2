@@ -73,6 +73,9 @@ var frontend_config = {
         path: path.join(__dirname, 'dist'), // where to place webpack files
         sourceMapFilename: '[name].map',
     },
+    resolve: {
+        extensions: ['', '.js', '.jsx', '.ts', '.tsx']
+    },
     entry: {
         'frontend/index': './frontend/index.tsx',
     },

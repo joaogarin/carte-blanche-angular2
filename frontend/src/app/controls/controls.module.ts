@@ -4,8 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /**
  * Import our controls
  */
-import { StringControlComponent } from './base/stringControl/stringControl.component.ts';
-import { BooleanControlComponent } from './base/booleanControl/booleanControl.component.ts';
+import { StringControlComponent } from './base/stringControl/stringControl.component';
+import { BooleanControlComponent } from './base/booleanControl/booleanControl.component';
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule],

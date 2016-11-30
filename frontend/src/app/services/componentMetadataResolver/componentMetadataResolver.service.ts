@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import * as faker from 'faker';
 
 import { customMetadataToCode, codeToCustomMetadata, propsToVariation, addDataToVariation, variationsToProps } from './../../utils/index.ts';
-import { fakerDataGenerator } from './../index.ts';
+import { fakerDataGenerator } from './../index';
 
 @Injectable()
 export class ComponentMetadataResolver {

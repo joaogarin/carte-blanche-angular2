@@ -3,8 +3,8 @@
  */
 import { Component, Input, OnInit, ReflectiveInjector, ViewContainerRef, ViewChild, ComponentRef, OnChanges, ComponentFactoryResolver } from '@angular/core';
 
-import { ComponentGenerator, ComponentMetadataResolver } from './../../services/index.ts';
-import { VariationData } from './../../utils/index.ts';
+import { ComponentGenerator, ComponentMetadataResolver } from './../../services/index';
+import { VariationData } from './../../utils/index';
 
 /*
  * Dynamic outlet to generate components

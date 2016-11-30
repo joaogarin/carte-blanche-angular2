@@ -3,7 +3,7 @@
  */
 import { Component, Input } from '@angular/core';
 
-import { ButtonComponent } from './../index.ts';
+import { ButtonComponent } from './../index';
 /*
  * Dynamic outlet to generate components
  */

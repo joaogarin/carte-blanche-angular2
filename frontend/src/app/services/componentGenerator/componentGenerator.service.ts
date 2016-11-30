@@ -2,7 +2,7 @@ import { Injectable, Component, Input, ComponentFactory, ComponentFactoryResolve
 import { } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RuntimeCompiler } from "@angular/compiler";
-import { MyAppModule } from './../../../main.ts';
+import { MyAppModule } from './../../../main';
 
 @Injectable()
 export class ComponentGenerator {

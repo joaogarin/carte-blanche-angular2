@@ -4,8 +4,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { NgClass } from '@angular/common';
 
-import { CardComponent } from './../card/card.component.ts';
-import { createVariationFormComponent } from './createVariationForm.component.ts';
+import { CardComponent } from './../card/card.component';
+import { createVariationFormComponent } from './createVariationForm.component';
 
 /*
  * Dynamic outlet to generate components

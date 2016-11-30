@@ -74,7 +74,6 @@
     "karma-webpack": "^1.7.0",
     "semantic-release": "^6.3.2",
     "source-map-loader": "^0.1.5",
-    "ts-helper": "0.0.1",
     "ts-helpers": "^1.1.1",
     "ts-node": "^1.7.0",
     "tsc": "^1.20150623.0",
@@ -82,7 +81,7 @@
     "tslint": "^4.0.2",
     "tslint-loader": "^3.2.0",
     "typedoc": "^0.5.1",
-    "typescript": "2.0.10",
+    "typescript": "2.0.3",
     "webpack": "^1.13.1",
     "webpack-merge": "^1.0.1"
   },

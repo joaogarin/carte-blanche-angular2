@@ -4,7 +4,7 @@
 import { Component, Input, OnInit, ElementRef, Injector } from '@angular/core';
 import * as path from 'path';
 
-import { VariationData } from './../../utils/index.ts';
+import { VariationData } from './../../utils/index';
 
 /*
  * App Component

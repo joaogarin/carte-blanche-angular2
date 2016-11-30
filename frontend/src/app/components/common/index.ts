@@ -1,7 +1,7 @@
-export { ButtonComponent } from './button/button.component.ts';
-export { EditButtonComponent } from './editButton/editButton.component.ts';
-export { DeleteButtonComponent } from './deleteButton/deleteButton.component.ts';
-export { ModalComponent } from './modal/modal.component.ts';
-export { CreateVariationButtonComponent } from './createVariationButton/createVariationButton.component.ts';
-export { CardComponent } from './card/card.component.ts';
-export { createVariationFormComponent } from './createVariationButton/createVariationForm.component.ts';
+export { ButtonComponent } from './button/button.component';
+export { EditButtonComponent } from './editButton/editButton.component';
+export { DeleteButtonComponent } from './deleteButton/deleteButton.component';
+export { ModalComponent } from './modal/modal.component';
+export { CreateVariationButtonComponent } from './createVariationButton/createVariationButton.component';
+export { CardComponent } from './card/card.component';
+export { createVariationFormComponent } from './createVariationButton/createVariationForm.component';

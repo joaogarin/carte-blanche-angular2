@@ -4,9 +4,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { controlTypes } from './controlTypes.ts';
-import { ButtonComponent } from './../common/index.ts';
-import { ComponentMetadataResolver } from './../../services/index.ts';
+import { controlTypes } from './controlTypes';
+import { ButtonComponent } from './../common/index';
+import { ComponentMetadataResolver } from './../../services/index';
 @Component({
     selector: 'cb-customm-metadata-form',
     styles: [``],

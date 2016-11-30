@@ -13,23 +13,23 @@ import { HttpModule } from '@angular/http';
  * App Component
  * our top level component that holds all of our components
  */
-import {AppComponent} from './app/app.ts';
+import {AppComponent} from './app/app';
 
 /**
  * import services
  */
-import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator } from './app/services/index.ts';
+import { ComponentGenerator, ComponentMetadataResolver, fakerDataGenerator } from './app/services/index';
 
 /**
  * import components
  */
 import { ButtonComponent, CardComponent, CreateVariationButtonComponent, createVariationFormComponent, EditButtonComponent, DeleteButtonComponent, ModalComponent } from './app/components/common/index.ts';
-import { customMetadataFormComponent } from './app/components/customMetadataForm/customMetadataForm.component.ts';
-import { Playlist } from './app/components/playlist/playlist.component.ts';
-import { PlaylistList } from './app/components/playlistList/playlistList.component.ts';
-import { DynamicOutlet } from './app/components/dynamicOutlet/dynamicOutlet.component.ts';
-import { IframeComponent } from './app/components/iframe/iframe.component.ts';
-import { EditVariationFormComponent } from './app/components/editVariationForm/editVariationForm.component.ts';
+import { customMetadataFormComponent } from './app/components/customMetadataForm/customMetadataForm.component';
+import { Playlist } from './app/components/playlist/playlist.component';
+import { PlaylistList } from './app/components/playlistList/playlistList.component';
+import { DynamicOutlet } from './app/components/dynamicOutlet/dynamicOutlet.component';
+import { IframeComponent } from './app/components/iframe/iframe.component';
+import { EditVariationFormComponent } from './app/components/editVariationForm/editVariationForm.component';
 
 @NgModule({
   declarations: [AppComponent,

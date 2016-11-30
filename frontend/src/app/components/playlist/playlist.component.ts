@@ -2,10 +2,10 @@
  * Angular 2 decorators and services
  */
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CardComponent } from './../common/card/card.component.ts';
-import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component.ts';
+import { CardComponent } from './../common/card/card.component';
+import {DynamicOutlet} from './../dynamicOutlet/dynamicOutlet.component';
 
-import { EditVariationFormComponent } from './../editVariationForm/editVariationForm.component.ts';
+import { EditVariationFormComponent } from './../editVariationForm/editVariationForm.component';
 
 @Component({
     // The selector is what angular internally uses

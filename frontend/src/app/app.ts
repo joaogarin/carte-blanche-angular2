@@ -3,7 +3,7 @@
  */
 import { Component, Input, OnInit, ElementRef, Injector } from '@angular/core';
 
-import { PlaylistList } from './components/playlistList/playlistList.component.ts';
+import { PlaylistList } from './components/playlistList/playlistList.component';
 
 /*
  * App Component

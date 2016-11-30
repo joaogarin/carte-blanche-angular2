@@ -11,6 +11,10 @@
     "mapRoot": "",
     "strictNullChecks": false,
     "rootDir": ".",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
     "jsx": "react",
     "types": [
       "hammerjs",
@@ -19,7 +23,6 @@
       "source-map",
       "uglify-js",
       "webpack",
-      "core-js",
       "react",
       "faker"
     ]
@@ -29,5 +32,7 @@
   ],
   "compileOnSave": false,
   "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false }
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }

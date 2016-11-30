@@ -1,6 +1,6 @@
-import { StringControlComponent } from './base/stringControl/stringControl.component.ts';
-import { BooleanControlComponent } from './base/booleanControl/booleanControl.component.ts';
-import { NumberControlComponent } from './base/numberControl/numberControl.component.ts';
+import { StringControlComponent } from './base/stringControl/stringControl.component';
+import { BooleanControlComponent } from './base/booleanControl/booleanControl.component';
+import { NumberControlComponent } from './base/numberControl/numberControl.component';
 
 export const defaultControls = {
   // Basic
@@ -18,4 +18,4 @@ export const defaultControls = {
   },
 };
 
-export { ControlsModule } from './controls.module.ts';
+export { ControlsModule } from './controls.module';

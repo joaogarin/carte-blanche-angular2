@@ -3,10 +3,10 @@
  */
 import { Component, Input } from '@angular/core';
 
-import { Playlist } from './../playlist/playlist.component.ts';
-import { CreateVariationButtonComponent, ModalComponent, EditButtonComponent } from './../common/index.ts';
-import { customMetadataFormComponent } from './../customMetadataForm/customMetadataForm.component.ts';
-import { ComponentGenerator, ComponentMetadataResolver } from './../../services/index.ts';
+import { Playlist } from './../playlist/playlist.component';
+import { CreateVariationButtonComponent, ModalComponent, EditButtonComponent } from './../common/index';
+import { customMetadataFormComponent } from './../customMetadataForm/customMetadataForm.component';
+import { ComponentGenerator, ComponentMetadataResolver } from './../../services/index';
 
 @Component({
     // The selector is what angular internally uses

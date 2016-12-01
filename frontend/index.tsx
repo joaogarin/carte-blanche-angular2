@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import {main} from './src/main.ts';
+import {main} from './src/main';
 
 let bootstrapedComponentName: string;
 

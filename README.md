@@ -12,9 +12,26 @@
 var carteBlancheAngular2 = require('carteBlancheAngular2')
 
 plugins: [
-  new carteBlancheAngular2({ /* …options… */ })
+  // Plugin: CarteBlanche
+  // Description: Provides a carte blanche page for testing components.
+  // Allows to test each component and its variations separatly
+  new CarteBlanche({
+    componentRoot: 'src/app/components',
+    filter: /.*\.component.ts$/, // Matches all files ending in .ts
+    plugins: [
+      new Angular2Plugin({
+        variationFolderName: 'variations',
+        port: 7000,
+        hostname: 'localhost',
+        bundle: 'main.js',
+      })
+    ]
+  })
 ]
 ```
+
+For now a main bundle must be provided. And additional files can be provided using the files property. in the future support for CommonChunks plugin will be added
+so that you dont have to specify your files explicitly.
 
 ## Options
 
@@ -36,5 +53,12 @@ new carteBlancheAngular2({
   ```JS
   new carteBlancheAngular2({
     hostname: 'mydomain.com'
+  })
+  ```
+
+- `bundle` (default: `main.js`): The name of the main bundle that holdes the application.
+  ```JS
+  new carteBlancheAngular2({
+    bundle: 'main.js'
   })
   ```

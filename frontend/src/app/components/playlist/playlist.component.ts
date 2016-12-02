@@ -45,7 +45,7 @@ import { EditVariationFormComponent } from './../editVariationForm/editVariation
         <cb-edit-button [size]="24" (click)="toggleModal()"></cb-edit-button>
         <cb-delete-button [size]="24" (click)="deleteVariation()"></cb-delete-button>
         <cb-card>
-            <cb-iframe [componentPath]="componentPath" [component]="component" [variationData]="variationData"></cb-iframe>
+            <cb-iframe [basePath]="basePath" [bundle]="bundle" [componentPath]="componentPath" [component]="component" [variationData]="variationData"></cb-iframe>
         </cb-card>
         <cb-modal [visible]="showModal" (onClose)="toggleModal()">
             <cb-edit-variation-form (onChanged)="persistVariation($event);"  [component]="component" [variationData]="variationData" [inputsCustomMeta]="inputsCustomMeta"></cb-edit-variation-form>
@@ -54,6 +54,8 @@ import { EditVariationFormComponent } from './../editVariationForm/editVariation
     </div>`,
 })
 export class Playlist {
+    @Input() basePath: string;
+    @Input() bundle: string;
     @Input() component: any;
     @Input() componentPath: string;
     @Input() variationData: any;

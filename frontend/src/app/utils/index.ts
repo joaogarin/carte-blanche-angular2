@@ -1,6 +1,6 @@
-export { VariationData } from './variationData.interface.ts';
-export { codeToCustomMetadata } from './codeToCustomMetadata.ts';
-export { customMetadataToCode } from './customMetadataToCode.ts';
-export { propsToVariation } from './propsToVariation.ts';
-export { addDataToVariation } from './addDataToVariation.ts';
-export { variationsToProps } from './variationsToProps.ts';
+export { VariationData } from './variationData.interface';
+export { codeToCustomMetadata } from './codeToCustomMetadata';
+export { customMetadataToCode } from './customMetadataToCode';
+export { propsToVariation } from './propsToVariation';
+export { addDataToVariation } from './addDataToVariation';
+export { variationsToProps } from './variationsToProps';

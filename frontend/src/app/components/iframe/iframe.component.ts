@@ -19,6 +19,7 @@ import { VariationData } from './../../utils/index';
 })
 export class IframeComponent implements OnInit {
     @Input() basePath: string;
+    @Input() bundle: string;
     @Input() component: any;
     @Input() componentPath: string;
     @Input() variationData: VariationData;
@@ -30,12 +31,9 @@ export class IframeComponent implements OnInit {
     }
 
     ngOnInit() {
-        //console.log(this.basePath);
         //this.userBundle = path.join(this.basePath, 'user-bundle.js');
-        this.userBundle = '';
         this.element = this._ref.nativeElement;
         this.iframe = this.element.children[0];
-        console.log(this.iframe);
         const doc = this.iframe.contentDocument;
         doc.open();
         // eslint-disable-next-line max-len
@@ -66,7 +64,7 @@ export class IframeComponent implements OnInit {
             <script type="text/javascript">
                 window.COMPONENT_PATH = '/${this.componentPath}';
             </script>
-            <script type="text/javascript" src="http://localhost:3000/main.js"></script></body>
+            <script type="text/javascript" src="${this.basePath}/${this.bundle}"></script></body>
         </body>
     </html>`;
     }

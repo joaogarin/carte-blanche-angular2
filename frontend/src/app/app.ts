@@ -14,7 +14,7 @@ import { PlaylistList } from './components/playlistList/playlistList.component';
     selector: '.cb-angular', // <app></app>
     // The template for our app
     template: `
-    <cb-playlist-list [frontendOptions]="frontendOptions" [componentPath]="componentPath" [componentName]="componentName" [componentObj]="componentObj"></cb-playlist-list>`
+    <cb-playlist-list [basePath]="basePath" [bundle]="bundle" [frontendOptions]="frontendOptions" [componentPath]="componentPath" [componentName]="componentName" [componentObj]="componentObj"></cb-playlist-list>`
 })
 export class AppComponent implements OnInit {
     componentName: string;
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
     compiledComponent: any;
     frontendOptions: any;
     basePath: string;
+    bundle: string;
     componentObj: Object;
 
     constructor(
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit {
         this.componentName = nativeElement.getAttributeNode("data-component").value;
         this.componentPath = nativeElement.getAttributeNode("data-component-path").value;
         this.componentSource = nativeElement.getAttributeNode("data-component-source").value;
+        this.basePath = nativeElement.getAttributeNode("data-base-path").value;
+        this.bundle = nativeElement.getAttributeNode("data-bundle").value;
 
         // DO JSON PARSE
         this.frontendOptions = nativeElement.getAttributeNode("data-frontend-options").value;

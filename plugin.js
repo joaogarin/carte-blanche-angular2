@@ -91,6 +91,7 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
     // Setting Default options for the plugin
     const options = defaults({}, this.options, {
         hostname: 'localhost',
+        bundle: 'main.js',
         files: [],
         injectTags: [],
         port: 8082,
@@ -123,9 +124,13 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
             // Read the data from this component
             let AngularSource = type_doc_parser(data.source);
             data.AngularSouce = AngularSource;
+            // @TODO - Support common chunks
+            data.bundle = options.bundle;
+            data.basePath = compiler.options.devServer ? `http://${compiler.options.devServer.host}:${compiler.options.devServer.port}` : `${options.hostname}:${options.port}`;
             data.AngularSourceParsed = type_doc_analyzer(JSON.parse(AngularSource));
         });
         compilation.plugin('carte-blanche-plugin-assets-processing', function (assets) {
+            // Polyfills and vendor file for Carteblanche angular2 plugin
             assets.push(path.join(__dirname, './frontend/polyfills.js'));
             assets.push(path.join(__dirname, './frontend/vendor.js'));
         });
@@ -134,7 +139,7 @@ Angular2Plugin.prototype.apply = function apply(compiler) {
             'carte-blanche-plugin-processing',
             (renderToClient) => {
                 renderToClient({
-                    // TODO the name is used in the iframe & playground list
+                    // @TODO the name is used in the iframe & playground list
                     // best to pass it in there instead of hardcoding it
                     name: 'angular2',
                     frontendData: { options },

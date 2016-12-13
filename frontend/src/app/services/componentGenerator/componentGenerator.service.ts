@@ -1,13 +1,12 @@
-import { Injectable, Component, Input, ComponentFactory, ComponentFactoryResolver, NgModule } from '@angular/core';
+import { Injectable, Component, Input, ComponentFactory, ComponentFactoryResolver, NgModule, Compiler } from '@angular/core';
 import { } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { RuntimeCompiler } from "@angular/compiler";
 import { MyAppModule } from './../../../main';
 
 @Injectable()
 export class ComponentGenerator {
 
-    constructor(private compiler: RuntimeCompiler) { }
+    constructor(private compiler: Compiler) { }
 
     /**
      * Create the metadata for the component to be used to generate the component Factory

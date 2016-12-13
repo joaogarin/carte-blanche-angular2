@@ -2,10 +2,9 @@
  * Providers provided by Angular
  */
 import { enableProdMode, NgModule } from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { COMPILER_PROVIDERS } from '@angular/compiler';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -13,7 +12,7 @@ import { HttpModule } from '@angular/http';
  * App Component
  * our top level component that holds all of our components
  */
-import {AppComponent} from './app/app';
+import { AppComponent } from './app/app';
 
 /**
  * import services
@@ -49,7 +48,6 @@ import { EditVariationFormComponent } from './app/components/editVariationForm/e
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule],
   providers: [
-    ...COMPILER_PROVIDERS,
     ComponentGenerator,
     fakerDataGenerator,
     ComponentMetadataResolver,

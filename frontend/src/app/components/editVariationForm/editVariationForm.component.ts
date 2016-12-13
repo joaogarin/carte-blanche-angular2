@@ -1,13 +1,12 @@
 /**
  * Import angular core dependencies
  */
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, QueryList, ViewContainerRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, QueryList, ViewContainerRef, ViewChildren, Compiler } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { RuntimeCompiler } from "@angular/compiler";
 
 import { ButtonComponent } from './../common/index';
 import { ComponentMetadataResolver } from './../../services/index';
-import { Subscription }   from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
 // Get our control types
 import { defaultControls, ControlsModule } from './../../controls/index';
@@ -44,7 +43,7 @@ export class EditVariationFormComponent implements OnInit {
         inputs: this.inputsGroup,
     });
 
-    constructor(private metaDataResolver: ComponentMetadataResolver, private compiler: RuntimeCompiler) {}
+    constructor(private metaDataResolver: ComponentMetadataResolver, private compiler: Compiler) { }
 
     ngOnInit() {
         // Save a copy so we dont manipulate the input when binding to the form

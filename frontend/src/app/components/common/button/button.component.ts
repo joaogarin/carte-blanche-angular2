@@ -4,6 +4,9 @@
 import { Component, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
 
+// Import styles variables
+import { styleVars } from '../../../styles';
+
 /*
  * Dynamic outlet to generate components
  */
@@ -23,7 +26,7 @@ import { NgClass } from '@angular/common';
         text-transform:uppercase;
         font-size: .8rem;
         font-weight: 300;
-        background: #282830;
+        background: ${styleVars.primaryColor};
         padding: 10px; 20px;
         box-shadow: 1px 0px 3px rgba(0,0,0,0.5);
         border: none;

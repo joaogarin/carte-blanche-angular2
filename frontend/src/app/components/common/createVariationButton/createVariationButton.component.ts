@@ -7,6 +7,8 @@ import { NgClass } from '@angular/common';
 import { CardComponent } from './../card/card.component';
 import { createVariationFormComponent } from './createVariationForm.component';
 
+import { styleVars } from './../../../styles';
+
 /*
  * Dynamic outlet to generate components
  */
@@ -55,7 +57,7 @@ import { createVariationFormComponent } from './createVariationForm.component';
         }
 
         .error {
-        color: #bd3230;
+        color: ${styleVars.errorColor};
         padding-bottom: 2rem;
         text-align: center;
         }

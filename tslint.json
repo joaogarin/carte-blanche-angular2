@@ -58,7 +58,6 @@
     ],
     "no-arg": true,
     "no-construct": true,
-    "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-empty": false,
     "no-eval": true,
@@ -66,7 +65,6 @@
     "no-trailing-whitespace": false,
     "no-unused-expression": true,
     "no-unused-variable": false,
-    "no-unreachable": true,
     "no-use-before-declare": true,
     "one-line": [
       true,

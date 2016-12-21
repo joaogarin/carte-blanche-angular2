@@ -5,3 +5,4 @@ tmp/
 typings/
 tsd-debug.log
 coverage/
+.vscode

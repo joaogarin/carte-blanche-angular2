@@ -84,7 +84,7 @@
     "typedoc": "^0.5.1",
     "typescript": "2.0.3",
     "webpack": "^1.13.1",
-    "webpack-merge": "^1.1.1"
+    "webpack-merge": "^2.0.0"
   },
   "peerDependencies": {
     "carte-blanche": "0.3.1",

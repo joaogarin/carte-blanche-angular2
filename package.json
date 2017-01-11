@@ -72,7 +72,7 @@
     "karma-mocha-reporter": "^2.0.4",
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.7.0",
+    "karma-webpack": "^2.0.0",
     "semantic-release": "^6.3.2",
     "source-map-loader": "^0.1.5",
     "ts-helpers": "^1.1.1",

@@ -28,7 +28,7 @@
     "@angular/http": "^4.0.0",
     "@angular/forms": "^4.0.0",
     "core-js": "^2.4.1",
-    "faker": "^3.1.0",
+    "faker": "^4.1.0",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
     "path": "^0.12.7",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/core-js": "^0.9.39",
-    "@types/faker": "^3.1.32",
+    "@types/faker": "^4.1.0",
     "@types/hammerjs": "^2.0.34",
     "@types/jasmine": "^2.5.46",
     "@types/lodash": "^4.14.58",

@@ -42,7 +42,7 @@
     "zone.js": "^0.8.5"
   },
   "devDependencies": {
-    "@types/core-js": "^0.9.39",
+    "@types/core-js": "^0.9.41",
     "@types/faker": "^4.1.0",
     "@types/hammerjs": "^2.0.34",
     "@types/jasmine": "^2.5.46",

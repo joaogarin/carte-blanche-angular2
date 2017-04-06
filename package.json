@@ -79,7 +79,7 @@
     "tsc": "^1.20150623.0",
     "tsconfig-lint": "^0.12.0",
     "tslint": "^5.0.0",
-    "tslint-loader": "^3.4.3",
+    "tslint-loader": "^3.5.1",
     "typedoc": "^0.5.9",
     "typescript": "^2.2.1",
     "webpack": "^1.13.1",

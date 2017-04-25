@@ -49,7 +49,7 @@
     "@types/lodash": "^4.14.58",
     "@types/moment-timezone": "^0.2.34",
     "@types/node": "^7.0.12",
-    "@types/react": "^15.0.20",
+    "@types/react": "^15.0.23",
     "@types/source-map": "^0.5.0",
     "@types/uglify-js": "^2.6.28",
     "@types/webpack": "^2.2.12",

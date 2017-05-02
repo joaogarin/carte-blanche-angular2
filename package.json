@@ -36,7 +36,7 @@
     "mkdirp": "^0.5.1",
     "path": "^0.12.7",
     "react": "^15.4.2",
-    "rxjs": "5.2.0",
+    "rxjs": "5.3.1",
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
     "zone.js": "^0.8.5"

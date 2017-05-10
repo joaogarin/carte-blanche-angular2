@@ -19,7 +19,7 @@
   "homepage": "https://github.com/joaogarin/carte-blanche-angular2",
   "dependencies": {
     "@angular/common": "^4.0.1",
-    "@angular/compiler": "^4.0.1",
+    "@angular/compiler": "^4.1.2",
     "@angular/compiler-cli": "^4.0.1",
     "@angular/core": "^4.0.1",
     "@angular/forms": "^4.0.1",

@@ -46,7 +46,7 @@
     "@types/faker": "^4.1.0",
     "@types/hammerjs": "^2.0.34",
     "@types/jasmine": "^2.5.46",
-    "@types/lodash": "^4.14.58",
+    "@types/lodash": "^4.14.65",
     "@types/moment-timezone": "^0.2.34",
     "@types/node": "^7.0.12",
     "@types/react": "^15.0.20",

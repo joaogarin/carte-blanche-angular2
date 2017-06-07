@@ -82,7 +82,7 @@
     "tslint-loader": "^3.4.3",
     "typedoc": "^0.5.9",
     "typescript": "^2.2.1",
-    "webpack": "^1.13.1",
+    "webpack": "^3.0.0-rc.1",
     "webpack-merge": "^2.0.0"
   },
   "peerDependencies": {

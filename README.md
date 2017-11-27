@@ -6,6 +6,8 @@
 [ci-img]:  https://travis-ci.org/joaogarin/carte-blanche-angular2.svg
 [ci]:      https://travis-ci.org/joaogarin/carte-blanche-angular2
 
+[![Video sample](https://img.youtube.com/vi/CAVp6YHavCU/0.jpg)](https://www.youtube.com/watch?v=CAVp6YHavCU)
+
 ## Usage
 
 ```js
